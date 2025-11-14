@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ project.title }} | VoluntHere{% endblock %}
+
+{% block content %}
+<div class="project-details">
+    <h1>{{ project.title }}</h1>
+    <p class="details-location">{{ project.location }}</p>
+    <p class="details-description">{{ project.description }}</p>
+
+    <a href="#" class="btn-primary">Join Project</a>
+</div>
+{% endblock %}
