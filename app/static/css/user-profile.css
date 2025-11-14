@@ -1,0 +1,88 @@
+/* ================================
+   PROFILE HEAD
+================================ */
+
+.profile-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;       /* centriranje */
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.profile-head .profile-pic {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+
+/* ================================
+   PROFILE INFO SECTION
+================================ */
+
+.profile-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;   /* leva | desna kolona */
+    gap: 40px;
+
+    width: 100%;
+    padding: 0 40px;                  /* grljenje containera */
+    box-sizing: border-box;
+    justify-items: center;
+}
+
+
+/* LEVA STRANA */
+.profile-info-left {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: flex-start;          /* grli levu stranu */
+}
+
+
+/* DESNA STRANA */
+.profile-info-right {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: flex-end;            /* grli desnu stranu */
+}
+
+
+/* KARTICE */
+.card {
+    background: #ffffff;
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    width: 100%;
+    max-width: 500px;                 /* da se ne širi beskonačno */
+    height: 150px;
+    overflow-y: auto;
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+    .profile-info {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .profile-info-left,
+    .profile-info-right {
+        align-items: center;     /* na mobilnom centrirano */
+    }
+}

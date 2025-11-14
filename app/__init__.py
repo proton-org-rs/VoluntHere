@@ -1,8 +1,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+from flask_bcrypt import Bcrypt
 from .config import Config
 
 db = SQLAlchemy()
+login_manager = LoginManager()
+bcrypt = Bcrypt()
 
 def create_app():
     app = Flask(__name__, instance_relative_config=True)
@@ -10,11 +14,19 @@ def create_app():
     app.config.from_pyfile("config.py", silent=True)
 
     db.init_app(app)
+    login_manager.init_app(app)
+    bcrypt.init_app(app)
 
-    # 🔹 modeli se uvoze kako bi SQLAlchemy registrovao tabele
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.filter_by(id=user_id).first()
+
+    @login_manager.unauthorized_handler
+    def unauthorized():
+        return redirect(url_for('main.index'))  # login view
+
     from app.models import User, Project, VolunteerApplication
 
-    # 🔹 registracija blueprintova
     from app.routes.main import main_bp
     from app.routes.projects import projects_bp
     from app.routes.auth import auth_bp
