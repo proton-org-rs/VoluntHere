@@ -1,0 +1,35 @@
+.admin-title {
+    text-align: center;
+    margin: 20px 0 30px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    padding: 0 30px 50px;
+}
+
+.admin-card {
+    background: #ffffff;
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.08);
+}
+
+.admin-card h2 {
+    margin-bottom: 15px;
+}
+
+.admin-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.admin-card li {
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}

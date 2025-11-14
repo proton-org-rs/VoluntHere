@@ -143,3 +143,44 @@ footer {
     margin-top: 60px;
     color: #777;
 }
+
+/* ---------- TOAST ---------- */
+
+#toast-container {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+}
+
+.toast {
+    background: #2b2b2b;
+    color: #ffffff;
+    padding: 14px 22px;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 15px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slide-in 0.4s forwards;
+}
+
+@keyframes slide-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.toast.hide {
+    animation: fade-out 0.4s forwards;
+}
+
+@keyframes fade-out {
+    to {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+

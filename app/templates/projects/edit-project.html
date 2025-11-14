@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+Edit Project | VoluntHere
+{% endblock %}
+{% block style %}
+{% endblock %}
+{% block script %}
+{% endblock %}
+{% block content %}
+<form method="POST" class="form">
+    <label>Title</label>
+    <input type="text" name="title" value="{{ project.title }}" required>
+
+    <label>Short description</label>
+    <input type="text" name="short_description" value="{{ project.short_description }}" required>
+
+    <label>Description</label>
+    <textarea name="description" required>{{ project.description }}</textarea>
+
+    <label>Location</label>
+    <input type="text" name="location" value="{{ project.location }}"required>
+
+    <label>Date</label>
+    <input type="date" name="date" value="{{ project.date }}" required>
+
+    <label>Finished</label>
+    <input type="checkbox" name="finished" {% if project.finished %} checked {% endif %}> Finished
+
+    <button type="submit" class="btn-primary">Save</button>
+</form>
+{% endblock %}
