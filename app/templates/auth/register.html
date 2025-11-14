@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Register | VoluntHere{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Create an Account</h1>
+
+<form method="POST" class="form">
+    <label>Full Name</label>
+    <input type="text" name="name" required>
+
+    <label>Email</label>
+    <input type="email" name="email" required>
+
+    <label>Password</label>
+    <input type="password" name="password" required>
+
+    <button type="submit" class="btn-primary">Join VoluntHere</button>
+</form>
+{% endblock %}

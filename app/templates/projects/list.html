@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% extends "base.html" %}
+{% block title %}Projects | VoluntHere{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Active Community Projects</h1>
+
+<div class="project-grid">
+    {% for project in projects %}
+    <div class="project-card">
+        <h2>{{ project.title }}</h2>
+        <p>{{ project.short_description }}</p>
+        <a href="/projects/{{ project.id }}" class="btn-secondary">View Details</a>
+    </div>
+    {% endfor %}
+</div>
+
+{% if not projects %}
+<p class="empty-text">No projects yet — be the first to create one!</p>
+{% endif %}
+{% endblock %}
+</title>
+</head>
+<body>
+
+</body>
+</html>
