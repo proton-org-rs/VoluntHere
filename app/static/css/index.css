@@ -30,6 +30,10 @@
     min-height: 400px;
     padding: 20px;
     width: 100%;
+
+    .filter-list{
+        list-style-type: none;
+    }
 }
 
 
