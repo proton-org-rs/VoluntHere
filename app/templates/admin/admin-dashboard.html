@@ -8,6 +8,10 @@ VoluntHere | Admin Dashboard
 <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
 {% endblock %}
 
+{% block script %}
+<script src="{{ url_for('static', filename='js/project-manipulation.js') }}"></script>
+{% endblock %}
+
 {% block content %}
 
 <h1 class="admin-title">Admin Dashboard</h1>
@@ -25,7 +29,6 @@ VoluntHere | Admin Dashboard
                     {{ project.short_description }}<br>
                     <small>Owner ID: {{ project.owner_id }}</small>
                     <button onclick="approveProject({{ project.id }})">Approve</button>
-                    <button onclick="suspendProject({{ project.id }})">Suspend</button>
                     <button onclick="deleteProject({{ project.id }})">Delete</button>
                 </li>
             {% endfor %}
@@ -44,6 +47,8 @@ VoluntHere | Admin Dashboard
                 <li>
                     <strong>{{ project.title }}</strong><br>
                     {{ project.short_description }}
+                    <button onclick="suspendProject({{ project.id }})">Suspend</button>
+                    <button onclick="deleteProject({{ project.id }})">Delete</button>
                 </li>
             {% endfor %}
             </ul>
@@ -61,6 +66,8 @@ VoluntHere | Admin Dashboard
                 <li>
                     <strong>{{ project.title }}</strong><br>
                     {{ project.short_description }}
+                    <button onclick="approveProject({{ project.id }})">Unsuspend</button>
+                    <button onclick="deleteProject({{ project.id }})">Delete</button>
                 </li>
             {% endfor %}
             </ul>
@@ -78,6 +85,7 @@ VoluntHere | Admin Dashboard
                 <li>
                     <strong>{{ user.username }}</strong>
                     — {{ user.role }}
+                    <button onclick="suspendUser({{ user.id }})">Suspend</button>
                 </li>
             {% endfor %}
             </ul>
@@ -94,6 +102,7 @@ VoluntHere | Admin Dashboard
             {% for user in suspended_users %}
                 <li>
                     <strong>{{ user.username }}</strong>
+                    <button onclick="unsuspendUser({{ user.id }})">Unsuspend</button>
                 </li>
             {% endfor %}
             </ul>

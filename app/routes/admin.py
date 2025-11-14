@@ -1,4 +1,6 @@
-from flask import Blueprint, jsonify, abort, request
+from importlib import reload
+
+from flask import Blueprint, jsonify, abort, request, render_template
 from flask_login import login_required, current_user
 from app.models import Project, User
 from app import db
@@ -10,6 +12,29 @@ admin_bp = Blueprint("admin", __name__)
 # ============================
 # PROJECT ACTIONS
 # ============================
+@admin_bp.route("/dashboard")
+@login_required
+@admin_required
+def dashboard():
+
+    # Projekti po statusu
+    pending_projects = Project.query.filter_by(approved=False, suspended=False).all()
+    active_projects = Project.query.filter_by(approved=True, suspended=False).all()
+    suspended_projects = Project.query.filter_by(suspended=True).all()
+
+    # Useri
+    all_users = User.query.all()
+    suspended_users = User.query.filter_by(role="suspended").all() if hasattr(User, 'suspended') else []
+
+    return render_template(
+        "admin/admin-dashboard.html",
+        pending_projects=pending_projects,
+        active_projects=active_projects,
+        suspended_projects=suspended_projects,
+        all_users=all_users,
+        suspended_users=suspended_users
+    )
+
 
 @admin_bp.route("/project/approve/<int:project_id>", methods=["POST"])
 @login_required
