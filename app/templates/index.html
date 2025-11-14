@@ -26,23 +26,14 @@
 
     <!-- Project Cards -->
     <div class="projects">
+        {% for project in projects %}
         <div class="project-card">
-            <h4>Park Cleanup</h4>
-            <p>Local volunteers gathering to clean a neglected urban park.</p>
-            <button class="btn-small">View</button>
+            <h2>{{ project.title }}</h2>
+            <p>{{ project.short_description }}</p>
+            <a href="/projects/{{ project.id }}" class="btn-secondary">View Details</a>
         </div>
+        {% endfor %}
 
-        <div class="project-card">
-            <h4>STEM Kids Workshop</h4>
-            <p>A free robotics workshop for kids aged 10–14.</p>
-            <button class="btn-small">View</button>
-        </div>
-
-        <div class="project-card">
-            <h4>Community Movie Night</h4>
-            <p>Outdoor cinema screening in the neighborhood.</p>
-            <button class="btn-small">View</button>
-        </div>
     </div>
 
     <!-- Map Image -->

@@ -1,7 +1,10 @@
 from flask import Blueprint, render_template
 
+from app.models import Project
+
 main_bp = Blueprint("main", __name__)
 
 @main_bp.route("/")
 def index():
-    return render_template("index.html")
+    projects = Project.query.all()
+    return render_template("index.html", projects=projects)
