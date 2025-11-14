@@ -7,13 +7,19 @@
     flex-direction: column;
     align-items: center;       /* centriranje */
     text-align: center;
+    margin: auto;
+    width: 300px;
+    height: 300px;
     margin-top: 40px;
     margin-bottom: 40px;
+    background: rgba(212, 141, 242, 0.3);
+    border-radius: 50px;
 }
 
 .profile-head .profile-pic {
     width: 140px;
     height: 140px;
+    margin-top: 10px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 15px;
@@ -28,7 +34,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr;   /* leva | desna kolona */
     gap: 40px;
-
     width: 100%;
     padding: 0 40px;                  /* grljenje containera */
     box-sizing: border-box;
@@ -56,7 +61,7 @@
 
 /* KARTICE */
 .card {
-    background: #ffffff;
+    background: rgba(212, 141, 242, 0.3);
     padding: 20px 25px;
     border-radius: 10px;
     box-shadow: 0 0 8px rgba(0,0,0,0.05);
@@ -64,6 +69,9 @@
     max-width: 500px;                 /* da se ne širi beskonačno */
     height: 150px;
     overflow-y: auto;
+    border-style: solid;
+    border-width: 4px;
+    border-color: rgba(171, 36, 227, 0.5);
 }
 
 .card h3 {

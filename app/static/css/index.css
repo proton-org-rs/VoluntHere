@@ -1,3 +1,4 @@
+
 /* -------------------------------------------------
    RECENT PROJECTS SECTION
 ---------------------------------------------------*/
@@ -25,7 +26,9 @@
 
 /* ---------- FILTER BAR (10%) ---------- */
 .filter-bar {
-    background: #f2f2f2;
+    background: #9c0dd9;
+    background: rgba(212, 141, 242, 0.3);
+
     border-radius: 10px;
     min-height: 400px;
     padding: 20px;
@@ -40,14 +43,21 @@
 
 /* ---------- PROJECTS (75%) ---------- */
 .projects {
-    background: #ffffff;
+    background: rgba(212, 141, 242, 0.5);
     border-radius: 10px;
     min-height: 400px;
     padding: 20px;
     box-shadow: 0 0 8px rgba(0,0,0,0.05);
     width: 100%;
+    border-style: solid
+    border-size: 4px;
+    border-fill: black;
 }
 
+.project-card{
+    background: rgba(215, 139, 247, 1);
+    color: rgba(255, 255, 255, 0.85);
+}
 
 
 /* ---------- MAP (10%) ---------- */
@@ -90,3 +100,4 @@
         display: none;
     }
 }
+
