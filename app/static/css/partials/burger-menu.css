@@ -1,0 +1,80 @@
+/* ---------- BURGER IKONICA + MENI ---------- */
+
+.menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Dugme */
+.burger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Tri linije */
+.burger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #333;
+    border-radius: 2px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Animacija kad je otvoreno */
+.burger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.burger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Padajući meni */
+.burger-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    padding: 10px 0;
+    min-width: 160px;
+    display: none;
+    z-index: 10;
+}
+
+.burger-menu a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.burger-menu a:hover {
+    background: #f2f2f2;
+}
+
+/* Kad je otvoren */
+.burger-menu.open {
+    display: block;
+}
+
+/* Malo prilagođavanje za mobilni */
+@media (max-width: 768px) {
+    .burger-menu {
+        min-width: 140px;
+    }
+}

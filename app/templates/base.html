@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>{% block title %}VoluntHere{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/burger-menu.css') }}">
+    <script src="{{ url_for('static', filename='js/burger-menu.js') }}"></script>
     {% block style %}{% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -29,10 +31,22 @@
             </form>
         </div>
 
-        <!-- Menu icon (right) -->
+        <!-- Menu (right) -->
         <div class="menu">
-            <img src="{{ url_for('static', filename='images/menu.png') }}" alt="Menu">
+            <button class="burger" id="burger-btn" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="burger-menu" id="burger-menu">
+                <a href="/">Home</a>
+                <a href="/projects">Projects</a>
+                <a href="/auth/login">Login</a>
+                <a href="/auth/register">Register</a>
+            </div>
         </div>
+
 
     </header>
 
