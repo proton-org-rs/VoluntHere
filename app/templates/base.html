@@ -4,33 +4,57 @@
     <meta charset="UTF-8">
     <title>{% block title %}VoluntHere{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    {% block style %}{% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="nav-left">
-            <a href="/" class="logo">VoluntHere</a>
-        </div>
-        <div class="nav-right">
-            <a href="/projects">Projects</a>
-            <a href="/auth/login">Login</a>
-            <a href="/auth/register" class="btn-primary">Join</a>
-        </div>
-    </nav>
+    <!-- ==========================================
+         CUSTOM NAVBAR (logo left, search center, menu right)
+    =========================================== -->
+    <header class="header">
 
-    <!-- MAIN CONTENT -->
+        <!-- Logo (left) -->
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="VoluntHere Logo">
+            </a>
+        </div>
+
+        <!-- Search bar (center) -->
+        <div class="search">
+            <form method="post" class="search-form">
+                <input type="text" placeholder="Search community projects…" name="search">
+            </form>
+        </div>
+
+        <!-- Menu icon (right) -->
+        <div class="menu">
+            <img src="{{ url_for('static', filename='images/menu.png') }}" alt="Menu">
+        </div>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         MAIN CONTENT
+    =========================================== -->
     <main class="container">
         {% block content %}{% endblock %}
     </main>
 
-    <!-- FOOTER -->
+
+
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
     <footer>
-        <p>© 2025 VoluntHere — Empowering Local Communities</p>
+        <p>© 2025 VoluntHere — developed by Proton ETF 1 at UniHack</p>
     </footer>
 
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
 </body>
 </html>
