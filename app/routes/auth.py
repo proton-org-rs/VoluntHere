@@ -1,3 +1,5 @@
+from idlelib.query import Query
+
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from app import db, bcrypt
@@ -62,5 +64,23 @@ def logout():
 @auth_bp.route("/profile", methods=["GET", "POST"])
 @login_required
 def profile():
-    return render_template("user/user-profile.html", user=current_user)
+    user = User.query.get_or_404(current_user.id)
+
+    applications = user.applications
+
+    current_projects = []
+    finished_projects = []
+
+    for app in applications:
+        if app.project.finished:
+            finished_projects.append(app)
+        else:
+            current_projects.append(app)
+
+    return render_template(
+        "user/user-profile.html",
+        user=user,
+        current_projects=current_projects,
+        finished_projects=finished_projects
+    )
 
