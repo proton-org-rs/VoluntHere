@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request
 from flask import jsonify
 from flask_login import current_user, login_required
 from app import db
-from app.models import Project, VolunteerApplication
+from app.models import Project, VolunteerApplication, Tag
 from datetime import datetime
 
 projects_bp = Blueprint("projects", __name__)
@@ -75,5 +75,33 @@ def edit_project(project_id):
         db.session.commit()
         return render_template("projects/edit-project.html", project=project)
 
+@projects_bp.route("/filter/tag/<tag_name>")
+def filter_by_tag(tag_name):
+    tag_name = tag_name.lower()
+
+    tag = Tag.query.filter_by(name=tag_name).first_or_404()
+
+    projects = (
+        Project.query
+        .join(Project.tags)
+        .filter(
+            Tag.name == tag_name,
+            Project.approved.is_(True),
+            Project.suspended.is_(False),
+            Project.finished.is_(False)
+        )
+        .order_by(Project.created_at.desc())
+        .limit(3)
+        .all()
+    )
+
+    return jsonify([
+        {
+            "id": p.id,
+            "title": p.title,
+            "short_description": p.short_description
+        }
+        for p in projects
+    ])
 
 

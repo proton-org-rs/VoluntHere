@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
             html += `<div class="category">Users</div>`;
             data.users.forEach(u => {
                 html += `
-                    <a href="/profile/${u.id}" class="result-item">
+                    <a href="/auth/profile/${u.username}" class="result-item">
                         <strong>${u.username}</strong>
                         <span>${u.name}</span>
                     </a>

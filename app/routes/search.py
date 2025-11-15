@@ -43,16 +43,19 @@ def search_ajax():
     if not query:
         return jsonify({"users": [], "projects": [], "tags": []})
 
-    # User search
+    # USER SEARCH
     users = User.query.filter(
+        User.role != "suspended",
         or_(
             User.username.ilike(f"%{query}%"),
             User.name.ilike(f"%{query}%")
         )
     ).limit(5).all()
 
-    # Project search
+    # PROJECT SEARCH
     projects = Project.query.filter(
+        Project.approved.is_(True),
+        Project.suspended.is_(False),
         or_(
             Project.title.ilike(f"%{query}%"),
             Project.short_description.ilike(f"%{query}%"),
