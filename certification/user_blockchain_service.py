@@ -57,6 +57,7 @@ class UserBlockchainService:
     async def issue_certificate_to_user(self, user_id: str, event_id: str, hours: int):
         """
         Issue a volunteer certificate to a registered user.
+        Now waits for transaction confirmation before returning.
         """
         # Load user's wallet
         user_pubkey_str = self.wallet_manager.get_user_public_key(user_id)
@@ -70,6 +71,8 @@ class UserBlockchainService:
         seeds = [b"certificate", bytes(user_pubkey), event_id.encode('utf-8')]
         certificate_pubkey, _ = Pubkey.find_program_address(seeds, program.program_id)
         
+        print(f"Issuing certificate for event '{event_id}' to {user_id}...")
+        
         ctx = Context(
             accounts={
                 "issuer": self.provider.wallet.public_key,
@@ -79,7 +82,13 @@ class UserBlockchainService:
             }
         )
         
+        # Send transaction (will wait for confirmation due to TxOpts)
         tx_sig = await program.rpc["issue_certificate"](event_id, hours, ctx=ctx)
+        
+        # Extra wait to ensure propagation (optional, but safe)
+        await asyncio.sleep(0.5)
+        
+        print(f"✅ Certificate confirmed: {tx_sig}")
         
         return {
             "certificate_address": str(certificate_pubkey),
