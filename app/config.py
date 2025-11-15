@@ -2,6 +2,8 @@ import os
 
 class Config:
     SESSION_TYPE = "filesystem"
+    SESSION_FILE_DIR = os.path.join(os.path.dirname(__file__), '..', 'flask_session')
+    SESSION_PERMANENT = False
     SESSION_COOKIE_SAMESITE = "Lax"
     SESSION_COOKIE_SECURE = False
     SESSION_COOKIE_HTTPONLY = True
