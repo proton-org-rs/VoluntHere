@@ -43,7 +43,7 @@
 
 /* ---------- PROJECTS (75%) ---------- */
 .projects {
-    background: rgba(212, 141, 242, 0.5);
+    background: rgba(143, 108, 113, 0.8);
     border-radius: 10px;
     min-height: 400px;
     padding: 20px;
@@ -55,7 +55,7 @@
 }
 
 .project-card{
-    background: rgba(215, 139, 247, 1);
+    background: rgba(143, 108, 113, 1);
     color: rgba(255, 255, 255, 0.85);
 }
 
