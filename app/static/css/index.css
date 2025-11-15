@@ -6,9 +6,9 @@
 .recent-projects {
     display: grid;
     grid-template-columns: 0.1fr 0.75fr 0.15fr; /* 10% | 75% | 15% (map image may need more space) */
-    gap: 30px;
-    margin-top: 40px;
-    padding: 0 30px;
+    gap: 4rem;
+    margin-top: 0.3rem;
+    padding: 0 4rem;
     align-items: start;
     justify-content: space-around;
 }
@@ -26,12 +26,16 @@
 
 /* ---------- FILTER BAR (10%) ---------- */
 .filter-bar {
-    background: #9c0dd9;
-    background: rgba(212, 141, 242, 0.3);
-
-    border-radius: 10px;
-    min-height: 400px;
-    padding: 20px;
+    position: relative;
+    overflow: visible;
+    background: linear-gradient(
+      rgba(250,165,26, 1) 35%,
+      rgb(247,200,73) 150%);
+    border-radius: 1rem;
+    gap: 60rem;
+    /*border-radius: 3rem;*/
+    min-height: 15rem;
+    padding: 2rem;
     width: 100%;
 
     .filter-list{
@@ -39,24 +43,38 @@
     }
 }
 
+.filter-bar::before{
+    content: "";
+    position: absolute;
+    border-radius: 2em;
+    top: -3%;
+    left: -3%;
+    width: 105%;
+    height: 105%;
+    pointer-events: none;
+
+    filter: blur(5px);
+    z-index: -1;
+}
+
+
 
 
 /* ---------- PROJECTS (75%) ---------- */
 .projects {
-    background: rgba(143, 108, 113, 0.8);
+    background: linear-gradient(rgba(241, 187, 41, 0.9), rgb(244, 143, 60));
     border-radius: 10px;
     min-height: 400px;
     padding: 20px;
     box-shadow: 0 0 8px rgba(0,0,0,0.05);
     width: 100%;
-    border-style: solid
-    border-size: 4px;
-    border-fill: black;
+    border-style: solid;
 }
 
 .project-card{
-    background: rgba(143, 108, 113, 1);
-    color: rgba(255, 255, 255, 0.85);
+    background: rgba(244, 238, 216, 0.8);
+    color: rgba(78, 18, 18, 0.85);
+    margin-bottom: 1.5em;
 }
 
 
