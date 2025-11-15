@@ -4,7 +4,7 @@
 
 .profile-head {
     display: grid;
-    grid-template-columns: 0.4fr 0.2fr 0.4fr;
+    grid-template-columns: 0.2fr 0.4fr 0.4fr;
     align-items: center;       /* centriranje */
     text-align: center;
     margin: 1rem 4rem;
@@ -25,7 +25,6 @@
     width: 8rem;
     height: 8rem;
     margin-top: -1rem;
-
     border-radius: 10rem;
     border-style: double;
     border-color: rgba(227, 213, 16, 1);

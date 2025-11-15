@@ -1,18 +1,17 @@
 /* ---------- GLOBAL ---------- */
 body {
     font-family: Arial, sans-serif;
-    background-size: 400%, 400%;
     margin: 0;
-    background: linear-gradient(rgba(39, 7, 41,1), rgba(159, 60, 163, 1));
-    animation: gradientShift 5s ease infinite;
+    background: radial-gradient(circle at top left,
+    rgb(104, 210, 243) 0%,
+    rgb(40, 177, 220) 15%,
+    rgb(255, 255, 255) 35%,
+    rgb(255, 255, 255) 50%,
+    rgb(194, 90, 198) 80%,
+    rgb(129, 68, 236) 100%);
     color: rgba(255,254,254, 0.9)
 }
 
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
 
 body::before {
   content: '';
@@ -107,9 +106,22 @@ body::before {
 }
 
 .btn-secondary {
-    background: #eee;
-    padding: 6px 12px;
-    border-radius: 6px;
+    display: flex;
+    justify-content: flex-end;
+    background: #f1f1f1;
+    color: #2c5ab6;
+    font-family: fantasy Papyrus;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+    justify-self: flex-end;
+}
+
+.btn-secondary:hover{
+    background: green;
+    border: 1em, 3em;
 }
 
 /* ---------- HERO ---------- */
@@ -156,11 +168,14 @@ body::before {
 }
 
 .project-card {
-    background: white;
-    color: black;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.05);
+    background: rgba(247, 215, 248, 0.38); /* semi-transparent white */
+    backdrop-filter: blur(10px);          /* blur background behind card */
+    border: 0.2em solid rgba(223, 63, 63, 0.4); /* subtle border */
+    border-radius: 16px;                  /* rounded corners */
+    padding: 20px;
+
+    box-shadow: 0 8px 1em rgba(0, 0, 0, 0.2);
+    color: #222;
 }
 
 /* ---------- FORMS ---------- */
@@ -183,7 +198,7 @@ footer {
     text-align: center;
     padding: 30px;
     margin-top: 60px;
-    color: #777;
+    color: white;
 }
 
 /* ---------- TOAST ---------- */
