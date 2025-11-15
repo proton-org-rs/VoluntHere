@@ -8,52 +8,52 @@
 {% block content %}
 
 <section class="profile-head">
-    <img src="{{ user.profile_pic if user.profile_pic else url_for('static', filename='images/default-profile.png') }}"
+
+    <!-- PERSONAL INFO -->
+    <div class="personal-info card">
+        <h3>Personal Info</h3>
+
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Joined:</strong> {{ user.created_at.strftime('%Y-%m-%d') }}</p>
+    </div>
+
+    <div class="profile-image">
+        <img src="{{ user.profile_pic if user.profile_pic else url_for('static', filename='images/default-profile.png') }}"
          alt="profile picture"
          class="profile-pic">
-    <h1>{{ user.username }}</h1>
+        <h1>{{ user.username }}</h1>
+    </div>
+
+     <!-- SOCIAL -->
+    <div class="social card">
+        <h3>Social Links</h3>
+
+        {% if user.facebook or user.instagram or user.linkedin %}
+            {% if user.facebook %}
+            <p><strong>Facebook:</strong> <a href="{{ user.facebook }}" target="_blank">{{ user.facebook }}</a></p>
+            {% endif %}
+            {% if user.instagram %}
+            <p><strong>Instagram:</strong> <a href="{{ user.instagram }}" target="_blank">{{ user.instagram }}</a></p>
+            {% endif %}
+            {% if user.linkedin %}
+            <p><strong>LinkedIn:</strong> <a href="{{ user.linkedin }}" target="_blank">{{ user.linkedin }}</a></p>
+            {% endif %}
+        {% else %}
+            <p>No social links added yet.</p>
+        {% endif %}
+    </div>
+
 </section>
 
 <section class="profile-info">
 
-    <!-- LEFT COLUMN -->
-    <div class="profile-info-left">
-
-        <!-- PERSONAL INFO -->
-        <div class="personal-info card">
-            <h3>Personal Info</h3>
-
-            <p><strong>Name:</strong> {{ user.name }}</p>
-            <p><strong>Username:</strong> {{ user.username }}</p>
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Joined:</strong> {{ user.created_at.strftime('%Y-%m-%d') }}</p>
-        </div>
-
-        <!-- SOCIAL -->
-        <div class="social card">
-            <h3>Social Links</h3>
-
-            {% if user.facebook or user.instagram or user.linkedin %}
-                {% if user.facebook %}
-                <p><strong>Facebook:</strong> <a href="{{ user.facebook }}" target="_blank">{{ user.facebook }}</a></p>
-                {% endif %}
-                {% if user.instagram %}
-                <p><strong>Instagram:</strong> <a href="{{ user.instagram }}" target="_blank">{{ user.instagram }}</a></p>
-                {% endif %}
-                {% if user.linkedin %}
-                <p><strong>LinkedIn:</strong> <a href="{{ user.linkedin }}" target="_blank">{{ user.linkedin }}</a></p>
-                {% endif %}
-            {% else %}
-                <p>No social links added yet.</p>
-            {% endif %}
-        </div>
-
+    <div class="projects-title">
+        <h1>PROJECTS</h1>
     </div>
-
-
-
     <!-- RIGHT COLUMN -->
-    <div class="profile-info-right">
+    <div class="profile-info-bottom">
 
         <!-- CURRENT PROJECTS -->
         <div class="current-projects card">
@@ -88,7 +88,5 @@
     </div>
 
 </section>
-
-
 
 {% endblock %}

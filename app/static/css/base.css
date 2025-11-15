@@ -2,7 +2,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background-color: rgba(69,31,80,1);
+    background-color: rgba(46, 8, 77, 0.9);
     color: rgba(255,254,254, 0.9)
 }
 
@@ -21,7 +21,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 15px;
+    padding: 0.7rem 0.7rem;
     width: 100%;
     box-sizing: border-box;
 
@@ -55,6 +55,7 @@ body {
         height: 50px;
         width: 50px;
         cursor: pointer;
+        margin-top: -0.2rem;
     }
 }
 

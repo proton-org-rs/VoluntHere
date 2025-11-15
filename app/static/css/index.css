@@ -5,7 +5,7 @@
 
 .recent-projects {
     display: grid;
-    grid-template-columns: 0.1fr 0.75fr 0.15fr; /* 10% | 75% | 15% (map image may need more space) */
+    grid-template-columns: 0.15fr 0.70fr 0.15fr;
     gap: 30px;
     margin-top: 40px;
     padding: 0 30px;
@@ -22,13 +22,9 @@
     text-align: center;
 }
 
-
-
 /* ---------- FILTER BAR (10%) ---------- */
 .filter-bar {
-    background: #9c0dd9;
-    background: rgba(212, 141, 242, 0.3);
-
+    background: rgba(250, 165, 26, 0.8);
     border-radius: 10px;
     min-height: 400px;
     padding: 20px;
@@ -39,11 +35,9 @@
     }
 }
 
-
-
 /* ---------- PROJECTS (75%) ---------- */
 .projects {
-    background: rgba(143, 108, 113, 0.8);
+    background: rgba(250, 165, 26, 0.8);
     border-radius: 10px;
     min-height: 400px;
     padding: 20px;
@@ -55,7 +49,7 @@
 }
 
 .project-card{
-    background: rgba(143, 108, 113, 1);
+    background: rgba(143, 108, 113, 0.5);
     color: rgba(255, 255, 255, 0.85);
 }
 
