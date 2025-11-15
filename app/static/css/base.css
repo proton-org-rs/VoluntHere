@@ -158,6 +158,10 @@ footer {
     padding: 30px;
     margin-top: 60px;
     color: #777;
+
+    img{
+        width: 64px;
+    }
 }
 
 /* ---------- TOAST ---------- */
