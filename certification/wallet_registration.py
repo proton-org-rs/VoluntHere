@@ -1,10 +1,10 @@
+import os
 from solders.pubkey import Pubkey
 from anchorpy import Program, Provider, Wallet, Idl, Context
 from solana.rpc.async_api import AsyncClient
-from wallet_manager import WalletManager
+from .wallet_manager import WalletManager
 import asyncio
 import json
-import os
 
 async def register_user_on_blockchain(user_id: str, rpc_url: str = "http://127.0.0.1:8899"):
     """

@@ -33,6 +33,10 @@ class WalletManager:
         Returns:
             Dictionary containing wallet info
         """
+        if os.path.exists(self.storage_path / f"{user_id}.json"):
+            print(f"❌ Wallet already exists for user: {user_id}")
+            return self.load_user_wallet(user_id)
+
         # Generate new keypair
         keypair = Keypair()
         
@@ -81,7 +85,12 @@ class WalletManager:
         # Reconstruct keypair from JSON
         keypair = Keypair.from_json(wallet_data["keypair_json"])
         
-        return keypair
+        # return keypair
+        return {
+            "user_id": user_id,
+            "public_key": keypair.pubkey(),
+            "wallet_file": str(wallet_file)
+        }
     
     def get_user_public_key(self, user_id: str) -> Optional[str]:
         """

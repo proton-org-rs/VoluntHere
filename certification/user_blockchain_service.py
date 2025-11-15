@@ -1,9 +1,10 @@
-from wallet_manager import WalletManager
+from .wallet_manager import WalletManager
+from .wallet_registration import register_user_on_blockchain
+
 from solders.pubkey import Pubkey
 from anchorpy import Program, Provider, Wallet, Idl, Context
 from solana.rpc.async_api import AsyncClient
 from solana.rpc.types import MemcmpOpts
-from wallet_registration import register_user_on_blockchain
 import asyncio
 import json
 from typing import List, Dict, Optional
