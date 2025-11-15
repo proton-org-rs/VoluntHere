@@ -9,6 +9,9 @@
     <p class="details-location">{{ project.location }}</p>
     <p class="details-description">{{ project.description }}</p>
 
-    <a href="#" class="btn-primary">Join Project</a>
+    <a onclick="joinProject({{ project.id }})" class="btn-primary">Join Project</a>
+    {% if project.owner_id == current_user.id%}
+        <a href='/projects/edit/{{ project.id }}' class="btn-primary">Edit Project</a>
+    {% endif %}
 </div>
 {% endblock %}

@@ -59,8 +59,6 @@
         <div class="current-projects card">
             <h3>Current Projects</h3>
 
-            {% set current_projects = user.applications %}
-
             {% if current_projects %}
                 <ul>
                 {% for application in current_projects %}
@@ -79,12 +77,19 @@
         <!-- PREVIOUS PROJECTS -->
         <div class="previous-list card">
             <h3>Previous Projects</h3>
-
-            <!-- For now, placeholder -->
-            <p>No previous projects recorded.</p>
-
-        </div>
-
+            {% if finished_projects %}
+                <ul>
+                {% for application in finished_projects %}
+                    <li>
+                        <strong>{{ application.project.title }}</strong>
+                        <p>{{ application.project.short_description }}</p>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>This user has no finished projects yet.</p>
+            {% endif %}
+            </div>
     </div>
 
 </section>

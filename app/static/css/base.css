@@ -1,9 +1,30 @@
 /* ---------- GLOBAL ---------- */
 body {
     font-family: Arial, sans-serif;
+    background-size: 400%, 400%;
     margin: 0;
-    background-color: rgba(46, 8, 77, 0.9);
+    background: linear-gradient(rgba(39, 7, 41,1), rgba(159, 60, 163, 1));
+    animation: gradientShift 5s ease infinite;
     color: rgba(255,254,254, 0.9)
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  background: rgba(255, 4, 153, 0.32);
+  border-radius: 50%;
+  filter: blur(150px);
+  top: 10%;
+  left: 20%;
+  z-index: -1;
 }
 
 .container {
@@ -18,44 +39,63 @@ body {
 
 /* SEARCH BAR — 70% širine, centriran */
 .header {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     justify-content: space-between;
-    padding: 0.7rem 0.7rem;
+    padding: 15px 15px;
     width: 100%;
     box-sizing: border-box;
 
     .logo img {
+        justify-self: start;
         height: 100px;
         width: auto;
+        filter: drop-shadow(0 0 1rem rgba(250, 165, 26));
     }
 
-    .search {
-        flex: 1;
-        display: flex;
-        justify-content: flex-start;
-
-        form{
-            width:65%;
-            margin-left: 90px;
-        }
+        /* SEARCH BAR (NAVBAR) */
+    .search-bar {
+        justify-self: right;
+        /*justify-content: center;*/
+        /*align-items: center;*/
+        background: #ffffff;
+        border-radius: 30px;
+        padding: 5px 10px;
+        gap: 10px;
+        box-shadow: 0 0 8px rgba(0,0,0,0.1);
 
         input {
-            width: 100%;
-            padding: 10px 15px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 16px;
+        border: none;
+        outline: none;
+        padding: 8px 12px;
+        font-size: 14px;
+        width: 220px;
+        background: none;
+        }
+
+        button {
+        border: none;
+        background: #4CAF50;
+        color: white;
+        padding: 8px 14px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+        button:hover {
+            background: #45a049;
         }
     }
 
     /* MENU — desna strana */
 
     .menu img {
-        height: 50px;
-        width: 50px;
+        justify-self: center;
+        height: 1em;
+        width: 1em;
         cursor: pointer;
-        margin-top: -0.2rem;
     }
 }
 
@@ -117,6 +157,7 @@ body {
 
 .project-card {
     background: white;
+    color: black;
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 0 6px rgba(0,0,0,0.05);
@@ -144,3 +185,45 @@ footer {
     margin-top: 60px;
     color: #777;
 }
+
+/* ---------- TOAST ---------- */
+
+#toast-container {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+}
+
+.toast {
+    justify-self: center;
+    background: #dcc3c3;
+    color: #000000;
+    padding: 14px 22px;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 15px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slide-in 0.4s forwards;
+}
+
+@keyframes slide-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.toast.hide {
+    animation: fade-out 0.4s forwards;
+}
+
+@keyframes fade-out {
+    to {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
