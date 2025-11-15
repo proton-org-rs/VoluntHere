@@ -76,4 +76,6 @@ async def main():
     else:
         print("❌ No certificates found for this user")
 
-asyncio.run(main())
+
+if __name__ == "__main__":
+    asyncio.run(main())
