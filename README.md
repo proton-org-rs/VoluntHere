@@ -37,9 +37,14 @@ cd VoluntHere
 pip install -r requirements.txt
 ```
 
+4. Create the database
+```bash
+python db_create.py
+```
+
 4. Run the app
 ```bash
-python app.py
+python run.py
 ```
 
 ## Contributing
