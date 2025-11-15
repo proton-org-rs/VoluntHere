@@ -70,7 +70,7 @@ def callback():
 def logout():
     logout_user()
 
-    domain = os.getenv("AUTH0_DOMAIN")
+    domain = "auth.volunthere.proton.org.rs"
     client_id = os.getenv("AUTH0_CLIENT_ID")
 
     return redirect(
