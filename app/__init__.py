@@ -31,8 +31,10 @@ def create_app():
     from app.routes.projects import projects_bp
     from app.routes.auth import auth_bp
     from app.routes.admin import admin_bp
+    from app.routes.search import search_bp
 
     app.register_blueprint(main_bp)
+    app.register_blueprint(search_bp)
     app.register_blueprint(projects_bp, url_prefix="/projects")
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(admin_bp, url_prefix="/admin")

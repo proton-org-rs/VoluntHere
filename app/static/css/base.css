@@ -30,21 +30,37 @@ body {
         width: auto;
     }
 
-    .search {
-        flex: 1;
+        /* SEARCH BAR (NAVBAR) */
+    .search-bar {
         display: flex;
-        justify-content: center;
-
-        form{
-            width:70%;
-        }
+        align-items: center;
+        background: #ffffff;
+        border-radius: 30px;
+        padding: 5px 10px;
+        gap: 10px;
+        box-shadow: 0 0 8px rgba(0,0,0,0.1);
 
         input {
-            width: 100%;
-            padding: 10px 15px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 16px;
+        border: none;
+        outline: none;
+        padding: 8px 12px;
+        font-size: 14px;
+        width: 220px;
+        background: none;
+        }
+
+        button {
+        border: none;
+        background: #4CAF50;
+        color: white;
+        padding: 8px 14px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+        button:hover {
+            background: #45a049;
         }
     }
 
