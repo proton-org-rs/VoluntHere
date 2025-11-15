@@ -2,8 +2,8 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background: #fafafa;
-    color: #333;
+    background-color: rgba(69,31,80,1);
+    color: rgba(255,254,254, 0.9)
 }
 
 .container {
@@ -21,12 +21,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 30px;
+    padding: 15px 15px;
     width: 100%;
     box-sizing: border-box;
 
     .logo img {
-        height: 40px;
+        height: 100px;
         width: auto;
     }
 
@@ -106,7 +106,6 @@ body {
     display: inline-block;
     margin-top: 20px;
 }
-
 /* ---------- FEATURES ---------- */
 .features {
     margin-top: 60px;
