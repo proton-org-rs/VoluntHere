@@ -5,8 +5,13 @@
     <title>{% block title %}VoluntHere{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/burger-menu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/search-results.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_small.png') }}">
     <script src="{{ url_for('static', filename='js/burger-menu.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/toast.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
     {% block style %}{% endblock %}
+    {% block script %}{% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -25,10 +30,13 @@
         </div>
 
         <!-- Search bar (center) -->
-        <div class="search">
-            <form method="post" class="search-form">
-                <input type="text" placeholder="Search community projects…" name="search">
+        <div class="nav-center">
+            <form action="{{ url_for('search.search') }}" method="GET" class="search-bar">
+                <input type="text" id="search-input" name="q" placeholder="Search..." autocomplete="off">
+                <button type="submit">🔍</button>
             </form>
+
+            <div id="search-results" class="search-results"></div>
         </div>
 
         <!-- Menu (right) -->
@@ -47,6 +55,10 @@
                 <a href="/auth/register">Register</a>
                 {% else %}
                 <a href="/auth/profile">Profile</a>
+                <a href="/projects/project-dashboard">Projects dashboard</a>
+                {% if current_user.role == "admin" or current_user.role == "super_admin" %}
+                <a href="/admin/dashboard">Admin dashboard</a>
+                {% endif %}
                 <a href="/auth/logout">Logout</a>
                 {% endif %}
             </div>
@@ -76,4 +88,6 @@
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 
 </body>
+
+<div id="toast-container"></div>
 </html>

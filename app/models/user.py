@@ -11,9 +11,10 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
 
-    linkedin = db.Column(db.String(120), nullable=True)
-    instagram = db.Column(db.String(120), nullable=True)
-    github = db.Column(db.String(120), nullable=True)
+    # ✔ Dodato: role = user, admin, super_admin
+    role = db.Column(db.String(20), default="user")
+
+    suspended = db.Column(db.Boolean, default=False)
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -21,3 +22,11 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"<User {self.email}>"
+
+    # Helper funkcije
+    def is_admin(self):
+        return self.role in ["admin", "super_admin"]
+
+    def is_super_admin(self):
+        return self.role == "super_admin"
+

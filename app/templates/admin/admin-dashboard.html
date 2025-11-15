@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}
+VoluntHere | Admin Dashboard
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/project-manipulation.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+
+<h1 class="admin-title">Admin Dashboard</h1>
+
+<div class="admin-grid">
+
+    <!-- 1. Projekti koji čekaju approval -->
+    <div class="admin-card">
+        <h2>Pending Projects</h2>
+        {% if pending_projects %}
+            <ul>
+            {% for project in pending_projects %}
+                <li>
+                    <strong>{{ project.title }}</strong><br>
+                    {{ project.short_description }}<br>
+                    <small>Owner ID: {{ project.owner_id }}</small>
+                    <button onclick="approveProject({{ project.id }})">Approve</button>
+                    <button onclick="deleteProject({{ project.id }})">Delete</button>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No pending projects.</p>
+        {% endif %}
+    </div>
+
+    <!-- 2. Aktivni projekti -->
+    <div class="admin-card">
+        <h2>Active Projects</h2>
+        {% if active_projects %}
+            <ul>
+            {% for project in active_projects %}
+                <li>
+                    <strong>{{ project.title }}</strong><br>
+                    {{ project.short_description }}
+                    <button onclick="suspendProject({{ project.id }})">Suspend</button>
+                    <button onclick="deleteProject({{ project.id }})">Delete</button>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No active projects.</p>
+        {% endif %}
+    </div>
+
+    <!-- 3. Suspendovani projekti -->
+    <div class="admin-card">
+        <h2>Suspended Projects</h2>
+        {% if suspended_projects %}
+            <ul>
+            {% for project in suspended_projects %}
+                <li>
+                    <strong>{{ project.title }}</strong><br>
+                    {{ project.short_description }}
+                    <button onclick="approveProject({{ project.id }})">Unsuspend</button>
+                    <button onclick="deleteProject({{ project.id }})">Delete</button>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No suspended projects.</p>
+        {% endif %}
+    </div>
+
+    <!-- 4. Svi useri -->
+    <div class="admin-card">
+        <h2>All Users</h2>
+        {% if all_users %}
+            <ul>
+            {% for user in all_users %}
+                <li>
+                    <strong>{{ user.username }}</strong>
+                    — {{ user.role }}
+                    <button onclick="suspendUser({{ user.id }})">Suspend</button>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No users found.</p>
+        {% endif %}
+    </div>
+
+    <!-- 5. Suspendovani useri -->
+    <div class="admin-card">
+        <h2>Suspended Users</h2>
+        {% if suspended_users %}
+            <ul>
+            {% for user in suspended_users %}
+                <li>
+                    <strong>{{ user.username }}</strong>
+                    <button onclick="unsuspendUser({{ user.id }})">Unsuspend</button>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No suspended users.</p>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock %}
