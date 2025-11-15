@@ -25,18 +25,20 @@ def create_app():
     def unauthorized():
         return redirect(url_for('main.index'))  # login view
 
-    from app.models import User, Project, VolunteerApplication
+    from app.models import User, Project, VolunteerApplication, Tag
 
     from app.routes.main import main_bp
     from app.routes.projects import projects_bp
     from app.routes.auth import auth_bp
     from app.routes.admin import admin_bp
     from app.routes.search import search_bp
+    from app.routes.tags import tags_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(search_bp)
     app.register_blueprint(projects_bp, url_prefix="/projects")
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(admin_bp, url_prefix="/admin")
+    app.register_blueprint(tags_bp, url_prefix="/tags")
 
     return app

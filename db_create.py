@@ -1,5 +1,5 @@
 from app import create_app, db, bcrypt
-from app.models import User, Project, VolunteerApplication
+from app.models import User, Project, Tag
 
 def init_db():
     app = create_app()
@@ -10,11 +10,10 @@ def init_db():
         db.create_all()
         print(">>> Tables created successfully!")
 
-        # -------------------------
-        # CREATE DEFAULT USERS
-        # -------------------------
+        # =====================================================
+        # DEFAULT USERS
+        # =====================================================
 
-        # Password for all demo users:
         default_password = bcrypt.generate_password_hash("password123").decode("utf-8")
 
         super_admin = User(
@@ -45,9 +44,27 @@ def init_db():
         db.session.commit()
         print(">>> Default users created.")
 
-        # -------------------------
-        # CREATE MULTIPLE PROJECTS
-        # -------------------------
+        # =====================================================
+        # TAGS
+        # =====================================================
+
+        tag_names = [
+            "cleanup", "environment", "education", "kids", "community",
+            "charity", "outdoor", "forest", "stem", "tech", "animals"
+        ]
+
+        tags = {name: Tag(name=name) for name in tag_names}
+        db.session.add_all(tags.values())
+        db.session.commit()
+        print(">>> Tags created.")
+
+        # helper funkcija za dodelu tagova
+        def get_tags(*names):
+            return [tags[name] for name in names if name in tags]
+
+        # =====================================================
+        # PROJECTS
+        # =====================================================
 
         projects = [
             Project(
@@ -55,41 +72,60 @@ def init_db():
                 short_description="Cleaning up our local community park.",
                 description="Volunteers gather to clean trash and improve the environment.",
                 location="Central Park",
-                owner_id = 1
+                owner_id=1,
+                approved=True,
+                tags=get_tags("cleanup", "environment", "community")
             ),
             Project(
                 title="Community Movie Night",
                 short_description="Outdoor cinema for the neighborhood.",
                 description="Volunteers organize an outdoor movie screening with snacks.",
                 location="Town Square",
-                owner_id = 1
+                owner_id=1,
+                approved=True,
+                tags=get_tags("community", "outdoor")
             ),
             Project(
                 title="STEM Kids Workshop",
                 short_description="Robotics workshop for young students.",
                 description="Interactive robotics & coding workshop for kids aged 10–14.",
                 location="Local School Lab",
-                owner_id = 1
+                owner_id=1,
+                approved=True,
+                tags=get_tags("STEM", "tech", "kids", "education")
             ),
             Project(
                 title="Food Drive",
                 short_description="Collecting food donations for families in need.",
-                description="A community-led initiative that gathers food supplies.",
+                description="A community-led initiative to gather food supplies.",
                 location="Donation Center",
-                owner_id = 1
+                owner_id=1,
+                approved=True,
+                tags=get_tags("charity", "community")
             ),
             Project(
                 title="Plant a Tree Day",
                 short_description="Tree-planting event for cleaner air.",
                 description="Volunteers plant young trees in the community forest.",
                 location="Forest Park",
-                owner_id = 1
+                owner_id=1,
+                approved=True,
+                tags=get_tags("environment", "forest", "outdoor")
+            ),
+            Project(  # jedan PENDING project
+                title="Animal Shelter Help",
+                short_description="Assist local animal shelter with care tasks.",
+                description="Feeding, grooming, and playing with shelter animals.",
+                location="City Shelter",
+                owner_id=1,
+                approved=False,
+                tags=get_tags("animals", "charity")
             )
         ]
 
         db.session.add_all(projects)
         db.session.commit()
-        print(">>> Demo projects created.")
+        print(">>> Projects with tags added successfully.")
 
         print(">>> Database initialization complete!")
 

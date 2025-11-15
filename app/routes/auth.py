@@ -61,10 +61,9 @@ def logout():
     flash("Logged out successfully.", "info")
     return redirect(url_for("main.index"))
 
-@auth_bp.route("/profile", methods=["GET", "POST"])
-@login_required
-def profile():
-    user = User.query.get_or_404(current_user.id)
+@auth_bp.route("/profile/<string:username>", methods=["GET", "POST"])
+def profile(username):
+    user = User.query.filter_by(username=username).first_or_404()
 
     applications = user.applications
 

@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function showResults(data) {
         let html = "";
 
-        if (data.users.length === 0 && data.projects.length === 0) {
+        if (data.users.length === 0 && data.projects.length === 0 && data.tags.length === 0) {
             resultsBox.style.display = "none";
             return;
         }
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
             html += `<div class="category">Users</div>`;
             data.users.forEach(u => {
                 html += `
-                    <a href="/profile/${u.id}" class="result-item">
+                    <a href="/auth/profile/${u.username}" class="result-item">
                         <strong>${u.username}</strong>
                         <span>${u.name}</span>
                     </a>
@@ -58,6 +58,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     <a href="/projects/${p.id}" class="result-item">
                         <strong>${p.title}</strong>
                         <span>${p.desc || ""}</span>
+                    </a>
+                `;
+            });
+        }
+
+        // TAGS
+        if (data.tags.length > 0) {
+            html += `<div class="category">Tags</div>`;
+            data.tags.forEach(t => {
+                html += `
+                    <a href="/tags/${t.name}" class="result-item tag-result">
+                        #${t.name}
                     </a>
                 `;
             });

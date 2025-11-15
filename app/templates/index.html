@@ -3,6 +3,9 @@
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
+{% block script %}
+<script src="{{ url_for('static', filename='js/tag-filtration.js') }}"></script>
+{% endblock %}
 {% block content %}
 
 <!-- ===================================
@@ -15,14 +18,18 @@
 
     <!-- Filter Bar -->
     <aside class="filter-bar">
-        <h3>Filters</h3>
+        <h3>Tags</h3>
         <ul class="filter-list">
-            <li><input type="checkbox"> Environment</li>
-            <li><input type="checkbox"> Education</li>
-            <li><input type="checkbox"> Community Events</li>
-            <li><input type="checkbox"> Volunteering</li>
+            {% for tag in tags %}
+            <li>
+                <button class="tag-filter-btn" data-tag="{{ tag.name }}">
+                    #{{ tag.name }}
+                </button>
+            </li>
+            {% endfor %}
         </ul>
     </aside>
+
 
     <!-- Project Cards -->
     <div class="projects">
