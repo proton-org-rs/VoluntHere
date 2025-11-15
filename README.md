@@ -26,7 +26,7 @@ VoluntHere is a platform designed for engaged citizens, community leaders, and c
 
 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/VoluntHere.git
+git clone https://github.com/proton-org-rs/VoluntHere.git
 ```
 
 2. Navigate to the project directory
