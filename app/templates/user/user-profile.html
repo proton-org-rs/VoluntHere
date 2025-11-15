@@ -8,9 +8,8 @@
 {% block content %}
 
 <section class="profile-head">
-    <img src="{{ user.profile_pic if user.profile_pic else url_for('static', filename='images/default-profile.png') }}"
-         alt="profile picture"
-         class="profile-pic">
+    <img src="{{ user.profile_pic or url_for('static', filename='images/default-profile.png') }}"
+     alt="Profile picture" class="profile-pic">
     <h1>{{ user.username }}</h1>
 </section>
 
