@@ -1,14 +1,8 @@
-import certification
-from solders.pubkey import Pubkey
-from anchorpy import Program, Provider, Wallet, Idl, Context
-from solana.rpc.async_api import AsyncClient
+import certification.user_blockchain_service
 import asyncio
 import json
-import os
-import time
 from random import randint
 
-import certification.user_blockchain_service
 
 async def main():
     service = certification.user_blockchain_service.UserBlockchainService()
