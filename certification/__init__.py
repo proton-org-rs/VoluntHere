@@ -1,2 +1,4 @@
 from .get_user_certs import get_user_certificates
 from .issue_cert import issue_certificate
+from .wallet_registration import register_user_on_blockchain
+from .wallet_manager import WalletManager
