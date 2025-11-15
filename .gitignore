@@ -126,3 +126,7 @@ dmypy.json
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Custom ignores
+user_wallets/
+wallets.json

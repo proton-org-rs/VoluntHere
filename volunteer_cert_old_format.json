@@ -1,0 +1,158 @@
+{
+  "version": "0.1.0",
+  "name": "volunteer_cert",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "mint_account",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "token_program",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "system_program",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "issue_certificate",
+      "accounts": [
+        {
+          "name": "issuer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "recipient",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "certificate",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "system_program",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "event_id",
+          "type": "string"
+        },
+        {
+          "name": "hours",
+          "type": "u16"
+        }
+      ]
+    },
+    {
+      "name": "revoke_certificate",
+      "accounts": [
+        {
+          "name": "issuer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "certificate",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Certificate",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "issuer",
+            "type": "publicKey"
+          },
+          {
+            "name": "recipient",
+            "type": "publicKey"
+          },
+          {
+            "name": "event_id",
+            "type": "string"
+          },
+          {
+            "name": "hours",
+            "type": "u16"
+          },
+          {
+            "name": "issued_at",
+            "type": "i64"
+          },
+          {
+            "name": "revoked",
+            "type": "bool"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "Certificate",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "issuer",
+            "type": "publicKey"
+          },
+          {
+            "name": "recipient",
+            "type": "publicKey"
+          },
+          {
+            "name": "event_id",
+            "type": "string"
+          },
+          {
+            "name": "hours",
+            "type": "u16"
+          },
+          {
+            "name": "issued_at",
+            "type": "i64"
+          },
+          {
+            "name": "revoked",
+            "type": "bool"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "Unauthorized",
+      "msg": "You are not authorized to perform this action"
+    }
+  ]
+}
