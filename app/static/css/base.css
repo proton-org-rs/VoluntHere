@@ -92,7 +92,7 @@ body::before {
     /* MENU — desna strana */
 
     .menu img {
-        justify-self: end;
+        justify-self: center;
         height: 1em;
         width: 1em;
         cursor: pointer;
@@ -157,6 +157,7 @@ body::before {
 
 .project-card {
     background: white;
+    color: black;
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 0 6px rgba(0,0,0,0.05);
@@ -196,8 +197,9 @@ footer {
 }
 
 .toast {
-    background: #2b2b2b;
-    color: #ffffff;
+    justify-self: center;
+    background: #dcc3c3;
+    color: #000000;
     padding: 14px 22px;
     border-radius: 8px;
     margin-top: 10px;
