@@ -19,6 +19,8 @@ VoluntHere is a platform designed for engaged citizens, community leaders, and c
 ### Prerequisites
 
 - Flask
+- Auth0
+- Solana
 
 ### Installation
 
@@ -42,7 +44,7 @@ pip install -r requirements.txt
 python db_create.py
 ```
 
-4. Run the app
+5. Run the app
 ```bash
 python run.py
 ```
