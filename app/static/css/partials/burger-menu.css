@@ -1,9 +1,10 @@
 /* ---------- BURGER IKONICA + MENI ---------- */
 
 .menu {
-    position: relative;
-    display: flex;
-    align-items: center;
+    position: absolute;
+    top: 1.25rem;     /* udaljenost od vrha */
+    right: 1.25rem;   /* udaljenost od desnog ruba */
+    z-index: 9999; /* da bude iznad svega */
 }
 
 /* Dugme */
