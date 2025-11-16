@@ -11,6 +11,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     profile_pic = db.Column(db.String(500), nullable=True)
+    certificate_issued = db.Column(db.Boolean, default=False)
 
     # ✔ Dodato: role = user, admin, super_admin
     role = db.Column(db.String(20), default="user")
