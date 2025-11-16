@@ -16,7 +16,7 @@ def search():
         or_(
             User.username.ilike(f"%{query}%"),
             User.name.ilike(f"%{query}%"),
-            User.email.ilike(f"%{query}%")
+            User.email.ilike(f"%{query}%"),
         )
     ).all()
 
@@ -70,7 +70,7 @@ def search_ajax():
 
     return jsonify({
         "users": [
-            {"id": u.id, "username": u.username, "name": u.name}
+            {"id": u.id, "username": u.username, "name": u.name, "profile_pic": u.profile_pic}
             for u in users
         ],
         "projects": [
