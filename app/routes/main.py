@@ -10,8 +10,8 @@ def index():
         Project.query
         .filter(Project.suspended == False)
         .filter(Project.approved == True)
+        .filter(Project.finished == False)
         .order_by(Project.created_at.desc())
-        .limit(3)
         .all()
     )
     tags = Tag.query.all()
