@@ -2,8 +2,28 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background: #fafafa;
-    color: #333;
+    background: radial-gradient(circle at top left,
+    rgb(104, 210, 243) 0%,
+    rgb(40, 177, 220) 15%,
+    rgb(255, 255, 255) 35%,
+    rgb(255, 255, 255) 50%,
+    rgb(194, 90, 198) 80%,
+    rgb(129, 68, 236) 100%);
+    color: rgba(255,254,254, 0.9)
+}
+
+
+body::before {
+  content: '';
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  background: rgba(255, 4, 153, 0.32);
+  border-radius: 50%;
+  filter: blur(150px);
+  top: 10%;
+  left: 20%;
+  z-index: -1;
 }
 
 .container {
@@ -18,22 +38,26 @@ body {
 
 /* SEARCH BAR — 70% širine, centriran */
 .header {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 30px;
+    padding: 15px 15px;
     width: 100%;
     box-sizing: border-box;
 
     .logo img {
-        height: 40px;
+        justify-self: start;
+        height: 100px;
         width: auto;
+        filter: drop-shadow(0 0 1rem rgba(250, 165, 26));
     }
 
         /* SEARCH BAR (NAVBAR) */
     .search-bar {
-        display: flex;
-        align-items: center;
+        justify-self: right;
+        /*justify-content: center;*/
+        /*align-items: center;*/
         background: #ffffff;
         border-radius: 30px;
         padding: 5px 10px;
@@ -67,8 +91,9 @@ body {
     /* MENU — desna strana */
 
     .menu img {
-        height: 50px;
-        width: 50px;
+        justify-self: center;
+        height: 1em;
+        width: 1em;
         cursor: pointer;
     }
 }
@@ -81,9 +106,22 @@ body {
 }
 
 .btn-secondary {
-    background: #eee;
-    padding: 6px 12px;
-    border-radius: 6px;
+    display: flex;
+    justify-content: flex-end;
+    background: #f1f1f1;
+    color: #2c5ab6;
+    font-family: fantasy Papyrus;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+    justify-self: flex-end;
+}
+
+.btn-secondary:hover{
+    background: green;
+    border: 1em, 3em;
 }
 
 /* ---------- HERO ---------- */
@@ -106,7 +144,6 @@ body {
     display: inline-block;
     margin-top: 20px;
 }
-
 /* ---------- FEATURES ---------- */
 .features {
     margin-top: 60px;
@@ -131,10 +168,14 @@ body {
 }
 
 .project-card {
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.05);
+    background: rgba(247, 215, 248, 0.38); /* semi-transparent white */
+    backdrop-filter: blur(10px);          /* blur background behind card */
+    border: 0.2em solid rgba(223, 63, 63, 0.4); /* subtle border */
+    border-radius: 16px;                  /* rounded corners */
+    padding: 20px;
+
+    box-shadow: 0 8px 1em rgba(0, 0, 0, 0.2);
+    color: #222;
 }
 
 /* ---------- FORMS ---------- */
@@ -175,8 +216,9 @@ footer {
 }
 
 .toast {
-    background: #2b2b2b;
-    color: #ffffff;
+    justify-self: center;
+    background: #dcc3c3;
+    color: #000000;
     padding: 14px 22px;
     border-radius: 8px;
     margin-top: 10px;

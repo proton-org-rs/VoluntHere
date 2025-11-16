@@ -1,9 +1,10 @@
 /* ---------- BURGER IKONICA + MENI ---------- */
 
 .menu {
-    position: relative;
-    display: flex;
-    align-items: center;
+    position: absolute;
+    top: 1.25rem;     /* udaljenost od vrha */
+    right: 1.25rem;   /* udaljenost od desnog ruba */
+    z-index: 9999; /* da bude iznad svega */
 }
 
 /* Dugme */
@@ -11,10 +12,10 @@
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
+    padding: 0.2rem;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0.3rem;
 }
 
 /* Tri linije */
@@ -25,6 +26,7 @@
     background: #333;
     border-radius: 2px;
     transition: transform 0.2s ease, opacity 0.2s ease;
+    background: rgba(255,254,254,1);
 }
 
 /* Animacija kad je otvoreno */
@@ -46,7 +48,7 @@
     top: 100%;
     right: 0;
     margin-top: 8px;
-    background: #ffffff;
+    background: rgba(212, 141, 242, 0.1);
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.12);
     padding: 10px 0;
@@ -59,7 +61,7 @@
     display: block;
     padding: 8px 16px;
     text-decoration: none;
-    color: #333;
+    color: rgba(255, 255, 255);
     font-size: 14px;
 }
 

@@ -1,6 +1,12 @@
+
 /* -------------------------------------------------
    RECENT PROJECTS SECTION
 ---------------------------------------------------*/
+
+.container{
+    max-width: 87.5rem;
+    padding: 10rem;
+}
 
 .recent-projects {
     display: grid;
@@ -103,20 +109,38 @@
     }
 }
 
+.filter-bar::before{
+    content: "";
+    position: absolute;
+    border-radius: 2em;
+    top: -3%;
+    left: -3%;
+    width: 105%;
+    height: 105%;
+    pointer-events: none;
+
+    filter: blur(5px);
+    z-index: -1;
+}
+
 
 
 
 /* ---------- PROJECTS (75%) ---------- */
 .projects {
-    background: #ffffff;
+    background: linear-gradient(rgba(241, 187, 41, 0.9), rgb(244, 143, 60));
     border-radius: 10px;
     height: calc(100vh - 360px);
     padding: 20px;
     box-shadow: 0 0 8px rgba(0,0,0,0.05);
     width: 100%;
     overflow-y: auto;
+    border-style: solid;
 }
 
+.project-card{
+    margin-bottom: 1.5rem;
+}
 
 
 /* ---------- MAP (10%) ---------- */
@@ -125,15 +149,17 @@
     justify-content: flex-end;
     align-items: flex-start;
     width: 100%;
+    height: 31.25rem;
 }
 
 .map img {
     max-width: 100%;
     height: calc(100vh - 360px);
     border-radius: 10px;
+#map{
+    width: 100%;
+    height: 31.25rem;
 }
-
-
 
 /* -------------------------------------------------
    RESPONSIVE FIXES (tablet + mobile)
@@ -159,3 +185,4 @@
         display: none;
     }
 }
+
