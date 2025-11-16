@@ -231,3 +231,93 @@
     }
 }
 
+
+
+/* TAB BUTTONS */
+.profile-tabs {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.profile-tabs .tab-btn {
+    background: none;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    color: #666;
+    position: relative;
+    font-size: 1rem;
+}
+
+.profile-tabs .tab-btn.active {
+    color: #000;
+}
+
+.profile-tabs .tab-btn.active::after {
+    content: "";
+    position: absolute;
+    width: 60%;
+    height: 3px;
+    background: #1e59ff;
+    bottom: -5px;
+    left: 20%;
+    border-radius: 3px;
+}
+
+/* TAB CONTENT WRAPPER */
+.tab-content-wrapper {
+    position: relative;
+    overflow: hidden;
+    margin-top: 2rem;
+    min-height: 200px;
+}
+
+/* INDIVIDUAL TABS */
+.tab-content {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(40px);
+    transition: 0.4s ease;
+    pointer-events: none;
+}
+
+.active-tab {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+/* ANIMATION CLASSES */
+.slide-out-left {
+    animation: slideOutLeft 0.35s forwards ease;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.35s forwards ease;
+}
+
+@keyframes slideOutLeft {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(-50px); opacity: 0; }
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Content styling example */
+.work-gallery {
+    display: flex;
+    gap: 1rem;
+}
+
+.work-card {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+}
+

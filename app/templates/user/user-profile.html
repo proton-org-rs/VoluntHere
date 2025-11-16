@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/user-profile.css') }}">
 {% endblock %}
 
+{% block script %} <script src="{{ url_for('static', filename='js/profile-tabs.js') }}"></script> {% endblock %}
+
 {% block content %}
 
 <section class="profile-header">
@@ -28,13 +30,75 @@
         </div>
 
         <!-- Tabs -->
+
         <div class="profile-tabs">
-            <button class="active">Work</button>
-            <button>Socials</button>
-            <button>Current projects</button>
-            <button>About</button>
+            <button class="tab-btn active" data-tab="work">Work</button>
+            <button class="tab-btn" data-tab="socials">Socials</button>
+            <button class="tab-btn" data-tab="current">Current projects</button>
+            <button class="tab-btn" data-tab="about">About</button>
         </div>
-    </div>
+
+        <!-- TAB CONTENT WRAPPER -->
+        <div class="tab-content-wrapper">
+
+            <!-- WORK TAB -->
+            <div class="tab-content active-tab" id="tab-work">
+                <h2>Work showcase</h2>
+                <p>This user’s featured work and highlights.</p>
+                <div class="work-gallery">
+                    <div class="work-card">Project Showcase 1</div>
+                    <div class="work-card">Project Showcase 2</div>
+                </div>
+            </div>
+
+            <!-- SOCIALS TAB -->
+            <div class="tab-content" id="tab-socials">
+                <h2>Social Links</h2>
+
+                {% if user.facebook or user.instagram or user.linkedin %}
+                    <ul>
+                        {% if user.facebook %}
+                            <li><a href="{{ user.facebook }}" target="_blank">Facebook</a></li>
+                        {% endif %}
+                        {% if user.instagram %}
+                            <li><a href="{{ user.instagram }}" target="_blank">Instagram</a></li>
+                        {% endif %}
+                        {% if user.linkedin %}
+                            <li><a href="{{ user.linkedin }}" target="_blank">LinkedIn</a></li>
+                        {% endif %}
+                    </ul>
+                {% else %}
+                    <p>This user has no social links yet.</p>
+                {% endif %}
+            </div>
+
+            <!-- CURRENT PROJECTS TAB -->
+            <div class="tab-content" id="tab-current">
+                <h2>Current volunteering</h2>
+
+                {% if current_projects %}
+                    <ul>
+                        {% for application in current_projects %}
+                            <li>
+                                <strong>{{ application.project.title }}</strong> –
+                                {{ application.project.short_description }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>This user is not currently participating in any active projects.</p>
+                {% endif %}
+            </div>
+
+            <!-- ABOUT TAB -->
+            <div class="tab-content" id="tab-about">
+                <h2>About {{ user.name }}</h2>
+                <p>{{ user.bio or "No biography added yet." }}</p>
+                <p>Member since: {{ user.created_at.strftime("%Y-%m-%d") }}</p>
+            </div>
+
+        </div>
+        </div>
 
     <div class="profile-right">
         <div class="stat">
