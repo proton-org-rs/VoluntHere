@@ -44,7 +44,7 @@ class UserBlockchainService:
         
         # 3. Register on blockchain
         # (Issue registration certificate or initialize user account)
-        register_user_on_blockchain(user_id, rpc_url=self.rpc_url)
+        await register_user_on_blockchain(user_id, rpc_url=self.rpc_url)
         
         return {
             "user_id": user_id,

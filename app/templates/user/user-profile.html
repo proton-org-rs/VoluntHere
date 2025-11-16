@@ -135,6 +135,21 @@
                 <a href="/projects/{{ application.project.id }}"><h3>{{ application.project.title }}</h3> </a>
                 <h5>Organized by: <a href="/auth/profile/{{application.project.owner.username}}">{{ application.project.owner.name }}</a></h5>
                 <p>{{ application.project.short_description }}</p>
+        <!-- PREVIOUS PROJECTS -->
+        <div class="previous-list card">
+            <h3>Previous Projects</h3>
+            {% if finished_projects %}
+                <ul>
+                {% for project in finished_projects %}
+                    <li>
+                        <strong>{{ project.event_id }}</strong>
+                        <p>Hours worked: {{ project.hours }}</p>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>This user has no finished projects yet.</p>
+            {% endif %}
             </div>
         {% endfor %}
     </div>
