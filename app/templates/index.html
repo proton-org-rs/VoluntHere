@@ -6,8 +6,12 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 {% endblock %}
 {% block script %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="{{ url_for('static', filename='js/tag-filtration.js') }}"></script>
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
 {% endblock %}
+
 {% block content %}
 
 <!-- ===================================
@@ -51,7 +55,4 @@
 
 </section>
 
-{% endblock %}
-{% block scripts %}
-    <script src="{{ url_for('static', filename='js/map.js') }}"></script>
 {% endblock %}
