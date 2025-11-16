@@ -1,10 +1,15 @@
+import json
+from asyncio import wait_for
+from os import waitpid
+
 import jsonify
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from flask import jsonify
 from flask_login import current_user, login_required
 from app import db
 from app.models import Project, VolunteerApplication, Tag
 from datetime import datetime
+from flask import flash
 
 projects_bp = Blueprint("projects", __name__)
 
@@ -103,5 +108,66 @@ def filter_by_tag(tag_name):
         }
         for p in projects
     ])
+
+# ==========================
+# TAG SEARCH API ENDPOINT
+# ==========================
+@projects_bp.route("/api/tags/search")
+def search_tags():
+    q = request.args.get("q", "").strip()
+    if not q:
+        return jsonify([])
+
+    tags = Tag.query.filter(Tag.name.ilike(f"%{q}%")).all()
+    return jsonify([{"id": t.id, "name": t.name} for t in tags])
+
+
+# ==========================
+# CREATE PROJECT
+# ==========================
+
+@projects_bp.route("/create-project", methods=["GET", "POST"])
+@login_required
+def create_project():
+    if request.method == "POST":
+        title = request.form.get("title")
+        short_description = request.form.get("short_description")
+        description = request.form.get("description")
+        location = request.form.get("location")
+
+        date_raw = request.form.get("date")
+        date = datetime.strptime(date_raw, "%Y-%m-%d").date()
+
+        tag_names_raw = request.form.get("tags")
+        tag_names = json.loads(tag_names_raw) if tag_names_raw else []
+
+        project = Project(
+            title=title,
+            short_description=short_description,
+            description=description,
+            location=location,
+            date=date,
+            owner_id=current_user.id,
+            approved=False,
+            suspended=False,
+        )
+
+        for name in tag_names:
+            tag = Tag.query.filter_by(name=name).first()
+            if not tag:
+                tag = Tag(name=name)
+                db.session.add(tag)
+            project.tags.append(tag)
+
+        db.session.add(project)
+        db.session.commit()
+
+
+        return redirect(url_for("projects.create_project", msg="created"))
+
+    return render_template("projects/create-project.html")
+
+
+
 
 
