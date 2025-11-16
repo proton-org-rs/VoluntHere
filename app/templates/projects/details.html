@@ -8,10 +8,11 @@
     <h1>{{ project.title }}</h1>
     <p class="details-location">{{ project.location }}</p>
     <p class="details-description">{{ project.description }}</p>
-
+    {% if current_user.is_authenticated %}
     <a onclick="joinProject({{ project.id }})" class="btn-primary">Join Project</a>
     {% if project.owner_id == current_user.id%}
         <a href='/projects/edit/{{ project.id }}' class="btn-primary">Edit Project</a>
+    {% endif %}
     {% endif %}
 </div>
 {% endblock %}

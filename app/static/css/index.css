@@ -10,10 +10,10 @@
 
 .recent-projects {
     display: grid;
-    grid-template-columns: 0.1fr 0.65fr 0.25fr; /* 10% | 75% | 15% (map image may need more space) */
-    gap: 4rem;
-    margin-top: -8rem;
-    padding: 0 4rem;
+    grid-template-columns: 0.15fr 0.65fr 0.15fr; /* 10% | 75% | 15% (map image may need more space) */
+    gap: 30px;
+    margin-top: 40px;
+    padding: 0 30px;
     align-items: start;
     justify-content: space-around;
 }
@@ -29,23 +29,83 @@
 
 
 
-/* ---------- FILTER BAR (10%) ---------- */
+/* -----------------------------------------
+   FILTER BAR — final merged version
+------------------------------------------*/
 .filter-bar {
-    position: relative;
-    overflow: visible;
-    background: linear-gradient(
-      rgba(250,165,26, 1) 35%,
-      rgb(247,200,73) 150%);
-    border-radius: 1rem;
-    gap: 60rem;
-    /*border-radius: 3rem;*/
-    min-height: 15rem;
-    padding: 1rem;
+    background: #f2f2f2;
+    border-radius: 10px;
+    padding: 20px;
     width: 100%;
 
+    /* Odvajanje od projekta */
+    margin-right: 10px;
+    position: relative;
+    height: calc(100vh - 360px);
+    z-index: 2;
 
-    .filter-list{
+    /* Adaptive height */
+    max-height: calc(100vh - 360px);
+    overflow-y: auto;
+
+    /* Scroll styling */
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #c7c7c7;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+
+    scrollbar-width: thin;
+    scrollbar-color: #c7c7c7 transparent;
+
+    /* ---- Filter list ---- */
+    .filter-list {
         list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .tag-filter-btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            width: 100%;
+            padding: 8px 14px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            transition: 0.2s ease-in-out;
+
+            &:hover {
+                background: #eaeaea;
+            }
+
+            &.active {
+                background: #dce4ff;
+                border-color: #7ea1ff;
+                color: #1a57d6;
+                font-weight: 600;
+            }
+        }
     }
 }
 
@@ -65,14 +125,16 @@
 
 
 
+
 /* ---------- PROJECTS (75%) ---------- */
 .projects {
     background: linear-gradient(rgba(241, 187, 41, 0.9), rgb(244, 143, 60));
     border-radius: 10px;
-    min-height: 400px;
+    height: calc(100vh - 360px);
     padding: 20px;
     box-shadow: 0 0 8px rgba(0,0,0,0.05);
     width: 100%;
+    overflow-y: auto;
     border-style: solid;
 }
 
@@ -90,6 +152,10 @@
     height: 31.25rem;
 }
 
+.map img {
+    max-width: 100%;
+    height: calc(100vh - 360px);
+    border-radius: 10px;
 #map{
     width: 100%;
     height: 31.25rem;

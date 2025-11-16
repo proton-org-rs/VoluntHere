@@ -19,12 +19,14 @@ VoluntHere is a platform designed for engaged citizens, community leaders, and c
 ### Prerequisites
 
 - Flask
+- Auth0
+- Solana
 
 ### Installation
 
 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/VoluntHere.git
+git clone https://github.com/proton-org-rs/VoluntHere.git
 ```
 
 2. Navigate to the project directory
@@ -37,9 +39,23 @@ cd VoluntHere
 pip install -r requirements.txt
 ```
 
-4. Run the app
+4. Set up your .env file
 ```bash
-python app.py
+AUTH0_CLIENT_ID=
+AUTH0_CLIENT_SECRET=
+AUTH0_CALLBACK_URL=
+AUTH0_AUDIENCE=
+SECRET_KEY=
+```
+
+5. Create the database
+```bash
+python db_create.py
+```
+
+6. Run the app
+```bash
+python run.py
 ```
 
 ## Contributing

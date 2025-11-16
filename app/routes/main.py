@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-from app.models import Project
+from app.models import Project, Tag
 
 main_bp = Blueprint("main", __name__)
 
@@ -10,8 +10,9 @@ def index():
         Project.query
         .filter(Project.suspended == False)
         .filter(Project.approved == True)
+        .filter(Project.finished == False)
         .order_by(Project.created_at.desc())
-        .limit(3)
         .all()
     )
-    return render_template("index.html", projects=projects)
+    tags = Tag.query.all()
+    return render_template("index.html", projects=projects, tags=tags)
