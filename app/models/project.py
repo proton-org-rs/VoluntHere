@@ -49,6 +49,7 @@ class Project(db.Model):
     finished = db.Column(db.Boolean, default=False)
 
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    owner = db.relationship("User", back_populates="projects_owned")
 
     approved = db.Column(db.Boolean, default=False)
     suspended = db.Column(db.Boolean, default=False)
