@@ -53,7 +53,7 @@ body::before{
         justify-self: start;
         height: 100px;
         width: auto;
-        filter: drop-shadow(0 0 1rem rgba(250, 165, 26));
+        filter: drop-shadow(0 0 1.3rem rgb(101, 94, 84));
     }
 
         /* SEARCH BAR (NAVBAR) */
@@ -111,7 +111,7 @@ body::before{
 .btn-secondary {
     display: flex;
     justify-content: flex-end;
-    background: #f1f1f1;
+    background: rgba(255, 255, 255, 0.34);
     color: #2c5ab6;
     font-family: fantasy Papyrus;
     font-weight: bold;
@@ -172,9 +172,9 @@ body::before{
 }
 
 .project-card {
-    background: rgba(247, 215, 248, 0.5); /* semi-transparent white */
+    background: rgba(218, 150, 176, 0.32); /* semi-transparent white */
     backdrop-filter: blur(10px);          /* blur background behind card */
-    border: 0.2rem solid rgba(239, 194, 194, 0.15); /* subtle border */
+    /*border: 0.2rem solid rgba(239, 194, 194, 0.15); !* subtle border *!*/
     border-radius: 16px;                  /* rounded corners */
     padding: 20px;
 
@@ -203,6 +203,11 @@ footer {
     padding: 30px;
     margin-top: 60px;
     color: #575555;
+
+    img{
+        width: 10%;
+        height: 10%;
+    }
 }
 
 /* ---------- TOAST ---------- */
@@ -224,7 +229,7 @@ footer {
     margin-top: 10px;
     font-size: 15px;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(1rem);
     animation: slide-in 0.4s forwards;
 }
 
