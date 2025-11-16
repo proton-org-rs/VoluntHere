@@ -34,7 +34,8 @@
     <!-- Project Cards -->
     <div class="projects">
         {% for project in projects %}
-        <div class="project-card">
+        <div class="project-card"
+             data-tags="{{ project.tags | map(attribute='name') | join(',') }}">
             <h2>{{ project.title }}</h2>
             <p>{{ project.short_description }}</p>
             <a href="/projects/{{ project.id }}" class="btn-secondary">View Details</a>
