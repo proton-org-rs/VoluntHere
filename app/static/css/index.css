@@ -3,6 +3,11 @@
    RECENT PROJECTS SECTION
 ---------------------------------------------------*/
 
+.container{
+    max-width: 87.5rem;
+    padding: 10rem;
+}
+
 .recent-projects {
     display: grid;
     grid-template-columns: 0.15fr 0.65fr 0.15fr; /* 10% | 75% | 15% (map image may need more space) */
@@ -110,6 +115,20 @@
     }
 }
 
+.filter-bar::before{
+    content: "";
+    position: absolute;
+    border-radius: 2em;
+    top: -3%;
+    left: -3%;
+    width: 105%;
+    height: 105%;
+    pointer-events: none;
+
+    filter: blur(5px);
+    z-index: -1;
+}
+
 
 
 
@@ -121,6 +140,7 @@
     padding: 20px;
     width: 100%;
     overflow-y: auto;
+    border-style: solid;
 }
 
 .project-card{
@@ -135,15 +155,17 @@
     justify-content: flex-end;
     align-items: flex-start;
     width: 100%;
+    height: 31.25rem;
 }
 
 .map img {
     max-width: 100%;
     height: calc(100vh - 360px);
     border-radius: 10px;
+#map{
+    width: 100%;
+    height: 31.25rem;
 }
-
-
 
 /* -------------------------------------------------
    RESPONSIVE FIXES (tablet + mobile)
