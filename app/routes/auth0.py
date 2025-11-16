@@ -80,9 +80,6 @@ def logout():
     client_id = os.getenv("AUTH0_CLIENT_ID")
     return_to = url_for('main.index', _external=True)
     
-    # Temporary debug - check your server logs to see what URL is generated
-    print(f"Logout returnTo URL: {return_to}")
-    
     return redirect(
         f"https://{domain}/v2/logout?"
         f"client_id={client_id}&"
