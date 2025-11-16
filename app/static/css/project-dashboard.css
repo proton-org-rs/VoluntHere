@@ -1,0 +1,6 @@
+.project-actions {
+    display: flex;
+    gap: 12px;         /* razmak između dugmadi */
+    align-items: center;  /* centriranje po Y osi */
+    margin-top: 10px;
+}

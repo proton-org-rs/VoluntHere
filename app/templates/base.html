@@ -10,7 +10,9 @@
     <script src="{{ url_for('static', filename='js/burger-menu.js') }}"></script>
     <script src="{{ url_for('static', filename='js/toast.js') }}"></script>
     <script src="{{ url_for('static', filename='js/search.js') }}"></script>
-    {% block style %}{% endblock %}
+    <script src="{{ url_for('static', filename='js/change-logo.js') }}"></script>
+    {% block style %}
+    {% endblock %}
     {% block script %}{% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -25,7 +27,11 @@
         <!-- Logo (left) -->
         <div class="logo">
             <a href="/">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="VoluntHere Logo">
+                <img
+                    src="{{ url_for('static', filename='images/logo.png') }}"
+                    data-desktop-logo="{{ url_for('static', filename='images/logo.png') }}"
+                    data-mobile-logo="{{ url_for('static', filename='images/logo_small.png') }}"
+                    alt="VoluntHere Logo">
             </a>
         </div>
 
@@ -54,7 +60,7 @@
                     <a href="/auth/login">Login</a>
                 {% else %}
                     <a href="/auth/profile/{{ current_user.username }}">Profile</a>
-                    <a href="/projects/create-project">Create a project</a>
+                    <a href="/projects/create-project" class="highlight-link">Create a project</a>
                     <a href="/projects/project-dashboard">Projects dashboard</a>
                     {% if current_user.role == "admin" or current_user.role == "super_admin" %}
                         <a href="/admin/dashboard">Admin dashboard</a>
@@ -82,7 +88,7 @@
          FOOTER
     =========================================== -->
     <footer>
-        <p>© 2025 VoluntHere — developed by Proton ETF 1 at UniHack</p>
+        <p>© 2025 <a href="https://github.com/proton-org-rs/VoluntHere" target="_blank" style="color: #575555">VoluntHere</a> — developed by <a href="https://proton.org.rs" target="_blank" style="color: #575555">Proton</a> ETF 1 at UniHack</p>
         <a href="https://proton.org.rs" target="_blank"><img src="{{ url_for('static', filename='images/proton_logo.png') }}" alt="Proton Logo"></a>
     </footer>
 

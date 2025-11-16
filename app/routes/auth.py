@@ -1,31 +1,64 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from app import db, bcrypt
-from app.models import User
+from app.models import User, VolunteerApplication, Project
 
 auth_bp = Blueprint("auth", __name__)
 
-@auth_bp.route("/profile/<string:username>", methods=["GET", "POST"])
+@auth_bp.route("/profile/<username>")
 def profile(username):
     user = User.query.filter_by(username=username).first_or_404()
 
-    applications = user.applications
+    # === STATISTIKA ===
 
-    current_projects = []
-    finished_projects = []
+    # 1) Finished projects where user participated
+    finished_projects_count = (
+        VolunteerApplication.query
+        .join(Project)
+        .filter(
+            VolunteerApplication.user_id == user.id,
+            Project.finished.is_(True)
+        ).count()
+    )
 
-    for app in applications:
-        if app.project.finished:
-            finished_projects.append(app)
-        else:
-            current_projects.append(app)
+    # 2) Active volunteerings (approved, not suspended, not finished)
+    currently_volunteering_count = (
+        VolunteerApplication.query
+        .join(Project)
+        .filter(
+            VolunteerApplication.user_id == user.id,
+            Project.finished.is_(False),
+            Project.suspended.is_(False),
+            Project.approved.is_(True)
+        ).count()
+    )
+
+    # 3) Projects owned by user (organizing)
+    organizing_count = (
+        Project.query
+        .filter(
+            Project.owner_id == user.id,
+            Project.finished.is_(False),
+            Project.suspended.is_(False)
+        ).count()
+    )
+
+    stats = {
+        "finished": finished_projects_count,
+        "volunteering": currently_volunteering_count,
+        "organizing": organizing_count
+    }
 
     return render_template(
         "user/user-profile.html",
         user=user,
-        current_projects=current_projects,
-        finished_projects=finished_projects
+        stats=stats,
+        current_projects=user.applications,   # već koristiš ovo
+        finished_projects=[
+            app for app in user.applications if app.project.finished
+        ]
     )
+
 
 
 
