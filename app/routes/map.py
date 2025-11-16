@@ -4,10 +4,9 @@ map_bp = Blueprint("map_bp", __name__)
 
 @map_bp.route("/api/projects")
 def get_project_locations():
-    # ❗❗ Importujemo modele OVDE — izbegava circular import ❗❗
     from app.models.project import Project
 
-    projects = Project.query.all()
+    approved_projects = Project.query.filter_by(approved=True).all()
 
     return jsonify([
         {
@@ -15,5 +14,5 @@ def get_project_locations():
             "title": p.title,
             "location": p.location
         }
-        for p in projects
+        for p in approved_projects
     ])
