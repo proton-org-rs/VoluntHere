@@ -7,13 +7,13 @@
     grid-template-columns: 0.2fr 0.5fr 0.3fr;
     align-items: center;
     text-align: center;
-    margin: 1rem 3rem 8rem -4rem;
+    margin: 1rem 3rem 2rem -4rem;
     max-width: 15rem;
 
     padding: 2rem;
     border-radius: 1.3rem;      /* rounded corners */
     background: radial-gradient(rgba(255,255,255,0.5),rgba(255,255,255,7) 180%);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);  /* soft shadow */
+    box-shadow: 0 0.1rem 1rem rgba(0,0,0,0.25);  /* soft shadow */
     img{
         border-radius: 50%;
     }
@@ -65,19 +65,20 @@
 
 .profile-info {
     width: 80%;
-    margin: 2rem auto;
-
-
-    padding: 2rem;
     box-sizing: border-box;
     border-radius: 1rem;
-
+    margin: 0 -5.9rem -3rem;
+    padding: 1rem 2rem 2rem;
+    h3{
+        padding-top: 1.5em;
+    }
 }
 
 .projects-title h1 {
-    text-align: center;
+    text-align: left;
     font-size: 32pt;
-    margin: 0 0 2rem 0;
+    margin: 1rem 0 1rem 0;
+    padding-left: 1rem;
 }
 
 /* DOLE STRANA */
@@ -85,13 +86,16 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-
+    min-height: fit-content;
+    .card{
+        height: 14rem;
+    }
 }
 
 /* KARTICE */
 .card {
-    background: rgba(255, 255, 255, 0.75);
-    padding: 0.5rem 2rem;
+    background: radial-gradient(rgba(255,255,255,0.5)0%, rgba(255,255,255,1)100%);
+    padding: 0.5rem 2rem 0 3rem;
     border-radius: 0.625rem;
     width: 100%;
     max-width: none;
@@ -99,7 +103,10 @@
     overflow-y: auto;
     box-sizing: border-box;
     border-width: 0.25rem;
-
+    box-shadow: 0 0.1rem 1rem rgba(0,0,0,0.25);
+    p{
+        padding-bottom: 2rem;
+    }
 }
 
 .card h3 {
