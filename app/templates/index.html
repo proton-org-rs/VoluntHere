@@ -39,12 +39,17 @@
     <!-- Project Cards -->
     <div class="projects">
         {% for project in projects %}
+        <a href="/projects/{{ project.id }}">
         <div class="project-card"
-             data-tags="{{ project.tags | map(attribute='name') | join(',') }}">
-            <h2>{{ project.title }}</h2>
-            <p>{{ project.short_description }}</p>
-            <a href="/projects/{{ project.id }}" class="btn-secondary">View Details</a>
-        </div>
+             data-id="{{ project.id }}"
+             data-tags="{{ project.tags | map(attribute='name') | join(',') }}"
+             data-owner-username="{{ project.owner.username }}"
+             data-owner-name="{{ project.owner.name }}">
+                <h2>{{ project.title }}</h2>
+                <h4>Organized by: <a href="/auth/profile/{{project.owner.username}}">{{project.owner.name}}</a></h4>
+                <p>{{ project.short_description }}</p>
+            </div>
+        </a>
         {% endfor %}
 
     </div>

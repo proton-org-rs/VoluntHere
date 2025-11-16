@@ -4,27 +4,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const projectContainer = document.querySelector(".projects");
 
     let activeFilters = [];
-    let originalProjects = []; // ovde čuvamo sve projekte
+    let originalProjects = [];
 
-    // FIRST LOAD – sačuvaj sve projekte iz DOM-a
-    // -------------------------------------------
+    // ============================================================
+    // 1. LOAD PROJECTS FROM DOM (SAFE VERSION)
+    // ============================================================
     document.querySelectorAll(".project-card").forEach(card => {
+
         originalProjects.push({
-            id: card.querySelector("a").getAttribute("href").split("/").pop(),
+            id: card.dataset.id,
             title: card.querySelector("h2").innerText,
-            short_description: card.querySelector("p").innerText
+            short_description: card.querySelector("p").innerText,
+            tags: card.dataset.tags ? card.dataset.tags.split(",") : [],
+            owner_username: card.dataset.ownerUsername || "",
+            owner_name: card.dataset.ownerName || ""
         });
     });
 
-    // --------------------------------------
-    // CLICK HANDLER ZA FILTER DUGMICE
-    // --------------------------------------
+    // ============================================================
+    // 2. TAG FILTER BUTTON CLICK HANDLER
+    // ============================================================
     buttons.forEach(btn => {
         btn.addEventListener("click", () => {
 
             const tag = btn.dataset.tag;
 
-            // TOGGLE
+            // Toggle ON/OFF
             if (activeFilters.includes(tag)) {
                 activeFilters = activeFilters.filter(t => t !== tag);
                 btn.classList.remove("active");
@@ -33,45 +38,38 @@ document.addEventListener("DOMContentLoaded", () => {
                 btn.classList.add("active");
             }
 
-            applyFilters(); // uvek osveži nakon svakog klika
+            applyFilters();
         });
     });
 
-
-    // --------------------------------------
-    // GLAVNA LOGIKA FILTRIRANJA
-    // --------------------------------------
+    // ============================================================
+    // 3. APPLY FILTER LOGIC
+    // ============================================================
     function applyFilters() {
 
-        // -----------------------------------
-        // 0 FILTERA → prikaz svih projekata
-        // -----------------------------------
+        // No active filters → show original projects
         if (activeFilters.length === 0) {
             updateProjects(originalProjects);
             return;
         }
 
-        // -----------------------------------
-        // Inače → fetch za svaki tag
-        // -----------------------------------
+        // Fetch results for each filter
         const requests = activeFilters.map(tag =>
             fetch(`/projects/filter/tag/${tag}`).then(res => res.json())
         );
 
         Promise.all(requests).then(results => {
 
-            // INTERSECTION svih setova projekata
+            // Intersection (AND logic)
             const intersection = intersect(results);
 
             updateProjects(intersection);
         });
     }
 
-
-    // --------------------------------------
-    // FUNKCIJA ZA PRESEK REZULTATA
-    // projekat mora biti u SVIM listama
-    // --------------------------------------
+    // ============================================================
+    // 4. INTERSECTION OF RESULT LISTS
+    // ============================================================
     function intersect(lists) {
 
         if (lists.length === 1) return lists[0];
@@ -87,13 +85,12 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     }
 
-
-    // --------------------------------------
-    // TVOJA ORIGINALNA FUNKCIJA — NE DIRAM
-    // --------------------------------------
+    // ============================================================
+    // 5. RENDER PROJECT CARDS (IDENTICAL STRUCTURE)
+    // ============================================================
     function updateProjects(projects) {
 
-        projectContainer.innerHTML = ""; // očisti stare
+        projectContainer.innerHTML = "";
 
         if (projects.length === 0) {
             projectContainer.innerHTML = `
@@ -103,12 +100,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         projects.forEach(p => {
+
+            const tagsString = p.tags ? p.tags.join(",") : "";
+
             projectContainer.innerHTML += `
-                <div class="project-card">
-                    <h2>${p.title}</h2>
-                    <p>${p.short_description}</p>
-                    <a href="/projects/${p.id}" class="btn-secondary">View Details</a>
-                </div>
+                <a href="/projects/${p.id}">
+                    <div class="project-card"
+                        data-id="${p.id}"
+                        data-tags="${tagsString}"
+                        data-owner-username="${p.owner_username || ""}"
+                        data-owner-name="${p.owner_name || ""}">
+                        
+                        <h2>${p.title}</h2>
+
+                        <h4>
+                            Organized by:
+                            <a href="/auth/profile/${p.owner_username || "#"}">
+                                ${p.owner_name || "Unknown"}
+                            </a>
+                        </h4>
+
+                        <p>${p.short_description}</p>
+                    </div>
+                </a>
             `;
         });
     }

@@ -30,7 +30,7 @@
 .filter-bar {
     position: relative;
     overflow: auto;
-    background: linear-gradient(135deg, rgba(105, 224, 236, 0.2) 0%, rgba(175, 234, 230, 0.14) 130%);
+    background: #eefaff;
     border-radius: 1rem;
     /*border-radius: 3rem;*/
     padding: 1.2rem;
@@ -112,15 +112,52 @@
     border-radius: 10px;
     height: calc(100vh - 360px);
     linear-gradient(101deg, rgb(255, 255, 255), rgb(194 137 239 / 27%) 36%, rgb(247 93 228 / 59%) 130%)
-    padding: 20px;
+    padding: 1.2rem;
     width: 100%;
     overflow-y: auto;
+    margin-left: 1.2rem;
+    padding-bottom: 2.4rem;
+    box-shadow: 0 8px 1em rgba(0, 0, 0, 0.3);
+    color: #222;
+
     /*border-style: solid;*/
+
+     /* Scroll styling */
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #c7c7c7;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+
+    scrollbar-width: thin;
+    scrollbar-color: #c7c7c7 transparent;
 }
 
 .project-card{
     margin-bottom: 1.2em;
-    background: rgba(197, 168, 168, 0.38);
+    background: #eefaff;
+    a{
+        color: #333;
+    }
+    a:hover{
+        color: #333;
+    }
+}
+
+.project-card:hover{
+    background-color: #bef1ff;
+    transition: 0.5s ease;
 }
 
 

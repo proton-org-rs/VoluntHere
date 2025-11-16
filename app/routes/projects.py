@@ -105,7 +105,12 @@ def filter_by_tag(tag_name):
         {
             "id": p.id,
             "title": p.title,
-            "short_description": p.short_description
+            "short_description": p.short_description,
+            "location": p.location,
+            "owner_id": p.owner_id,
+            "owner_username": p.owner.username,
+            "owner_name": p.owner.name,
+            "tags": [t.name for t in p.tags]
         }
         for p in projects
     ])

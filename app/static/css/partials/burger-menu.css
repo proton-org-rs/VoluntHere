@@ -2,8 +2,8 @@
 
 .menu {
     position: absolute;
-    top: 1.25rem;     /* udaljenost od vrha */
-    right: 1.25rem;   /* udaljenost od desnog ruba */
+    top: 2rem;     /* udaljenost od vrha */
+    right: 2rem;   /* udaljenost od desnog ruba */
     z-index: 9999; /* da bude iznad svega */
 }
 
@@ -24,9 +24,8 @@
     width: 24px;
     height: 2px;
     background: #333;
-    border-radius: 2px;
+    border-radius: 3px;
     transition: transform 0.2s ease, opacity 0.2s ease;
-    background: rgba(255,254,254,1);
 }
 
 /* Animacija kad je otvoreno */
@@ -48,7 +47,7 @@
     top: 100%;
     right: 0;
     margin-top: 8px;
-    background: rgba(212, 141, 242, 0.1);
+    background: rgba(255, 255, 255, 0.7);
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.12);
     padding: 10px 0;
@@ -61,7 +60,7 @@
     display: block;
     padding: 8px 16px;
     text-decoration: none;
-    color: rgba(255, 255, 255);
+    color: #333;
     font-size: 14px;
 }
 

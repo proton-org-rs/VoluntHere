@@ -4,6 +4,7 @@ body {
     font-weight: bolder;
     margin: 0;
     min-height: 10rem;
+    color: #333;
 }
 
 body::before{
@@ -11,14 +12,14 @@ body::before{
     position: fixed;
     inset: 0;
 
-    background: radial-gradient(ellipse at top left,
-    rgb(104, 210, 243) 5%,
-    rgb(40, 177, 220) 28%,
-    /*rgb(255, 255, 255) 35%,*/
-    rgb(255, 255, 255) 47%,
-    rgb(194, 90, 198) 70%,
-    rgb(187, 33, 248) 125%);
-    color: rgba(255,254,254, 0.9);
+    background: #4dc1ff;
+    background: linear-gradient(114deg,rgba(77, 193, 255, 1) 4%,
+    rgba(189, 233, 255, 1) 13%,
+    rgba(235, 249, 255, 1) 34%,
+    rgba(255, 240, 254, 1) 58%,
+    rgba(255, 229, 253, 1) 76%,
+    rgba(255, 176, 248, 1) 90%,
+    rgba(255, 110, 243, 1) 98%);
     width: 200%;
     height: 250%;
     transform: rotate(-30deg);
@@ -30,8 +31,7 @@ body::before{
 
 
 .container {
-    padding: 40px 20px;
-    max-width: 1100px;
+    max-width: 90vw;
     margin: auto;
 }
 
@@ -50,8 +50,8 @@ body::before{
     box-sizing: border-box;
 
     .logo img {
-        justify-self: start;
-        height: 100px;
+        justify-self: center;
+        height: 64px;
         width: auto;
         filter: drop-shadow(0 0 1.3rem rgb(101, 94, 84));
     }
@@ -59,8 +59,6 @@ body::before{
         /* SEARCH BAR (NAVBAR) */
     .search-bar {
         justify-self: right;
-        /*justify-content: center;*/
-        /*align-items: center;*/
         background: #ffffff;
         border-radius: 30px;
         padding: 5px 10px;
@@ -72,13 +70,14 @@ body::before{
         outline: none;
         padding: 8px 12px;
         font-size: 14px;
-        width: 220px;
+        width: 30vw;
         background: none;
+
         }
 
         button {
         border: none;
-        background: #4CAF50;
+        background: #d6d6d6;
         color: white;
         padding: 8px 14px;
         border-radius: 20px;
@@ -87,7 +86,7 @@ body::before{
     }
 
         button:hover {
-            background: #45a049;
+            background: #afafaf;
         }
     }
 
@@ -111,8 +110,8 @@ body::before{
 .btn-secondary {
     display: flex;
     justify-content: flex-end;
-    background: rgba(255, 255, 255, 0.34);
-    color: #2c5ab6;
+    background: rgba(255, 255, 255, 0.90);
+    color: #333;
     font-family: fantasy Papyrus;
     font-weight: bold;
     font-size: 1.1rem;
@@ -172,14 +171,11 @@ body::before{
 }
 
 .project-card {
-    background: rgba(218, 150, 176, 0.32); /* semi-transparent white */
+    background: rgba(255, 255, 255, 0.32); /* semi-transparent white */
     backdrop-filter: blur(10px);          /* blur background behind card */
     /*border: 0.2rem solid rgba(239, 194, 194, 0.15); !* subtle border *!*/
     border-radius: 16px;                  /* rounded corners */
     padding: 20px;
-
-    box-shadow: 0 8px 1em rgba(0, 0, 0, 0.3);
-    color: #222;
 }
 
 /* ---------- FORMS ---------- */
@@ -201,12 +197,11 @@ body::before{
 footer {
     text-align: center;
     padding: 30px;
-    margin-top: 60px;
     color: #575555;
 
     img{
-        width: 10%;
-        height: 10%;
+        width: 5%;
+        height: 5%;
     }
 }
 

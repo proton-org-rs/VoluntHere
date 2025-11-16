@@ -10,7 +10,9 @@
     <script src="{{ url_for('static', filename='js/burger-menu.js') }}"></script>
     <script src="{{ url_for('static', filename='js/toast.js') }}"></script>
     <script src="{{ url_for('static', filename='js/search.js') }}"></script>
-    {% block style %}{% endblock %}
+    <script src="{{ url_for('static', filename='js/change-logo.js') }}"></script>
+    {% block style %}
+    {% endblock %}
     {% block script %}{% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -25,7 +27,11 @@
         <!-- Logo (left) -->
         <div class="logo">
             <a href="/">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="VoluntHere Logo">
+                <img
+                    src="{{ url_for('static', filename='images/logo.png') }}"
+                    data-desktop-logo="{{ url_for('static', filename='images/logo.png') }}"
+                    data-mobile-logo="{{ url_for('static', filename='images/logo_small.png') }}"
+                    alt="VoluntHere Logo">
             </a>
         </div>
 
