@@ -10,6 +10,9 @@ from app import db
 from app.models import Project, VolunteerApplication, Tag
 from datetime import datetime
 from flask import flash
+import certification.user_blockchain_service
+from random import randint
+import asyncio
 
 projects_bp = Blueprint("projects", __name__)
 
@@ -62,7 +65,9 @@ def project_dashboard():
 
 @projects_bp.route('/edit/<int:project_id>', methods=['POST','GET'])
 @login_required
-def edit_project(project_id):
+async def edit_project(project_id):
+    service = certification.user_blockchain_service.UserBlockchainService()
+
     if request.method == "GET":
         if Project.query.filter_by(id=project_id).first().owner_id != current_user.id:
             return jsonify({'message': 'You do not have permission to edit this project!'}), 403
@@ -77,6 +82,32 @@ def edit_project(project_id):
         project.description = request.form['description']
         project.location = request.form['location']
         project.date = datetime.strptime(request.form['date'], "%Y-%m-%d").date()
+
+        if not project.finished and request.form.get("finished"):
+            # korisniku upisati sertifikat za ovaj projekat
+            temp = VolunteerApplication.query.filter_by(project_id=project.id).all()
+
+            users_to_certify = []
+
+            for app in temp:
+                if not app.user.certificate_issued:
+                    users_to_certify.append(app.user.username)
+            
+            print(f"\n\nUsers to certify: {users_to_certify}\n\n")
+
+            for username in users_to_certify:
+                try:
+                    await service.issue_certificate_to_user(username, project.title, randint(4, 16))
+                    
+                    # Mark as issued only if successful
+                    app = VolunteerApplication.query.filter_by(user_id=username, project_id=project.id).first()
+                    if app:
+                        app.user.certificate_issued = True
+                        
+                except Exception as e:
+                    print(f"Failed to issue certificate to {username}: {e}")
+                    # Continue to next user instead of failing entirely
+
         project.finished = bool(request.form.get("finished"))
         db.session.commit()
         return render_template("projects/edit-project.html", project=project)

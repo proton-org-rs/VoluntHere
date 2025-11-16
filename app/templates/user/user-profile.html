@@ -124,7 +124,7 @@
 <!-- ==========================
      PROJECTS SECTION
 ========================== -->
-<section class="user-projects">
+<section class="user-projects" style="width: 100vw;">
     <h2 class="section-title">User Projects</h2>
 
     <div class="project-display-grid">
@@ -138,6 +138,25 @@
             </div>
         {% endfor %}
     </div>
+
+        <!-- PREVIOUS PROJECTS -->
+        <h3>Previous Projects</h3>
+        <div class="project-display-grid" style="display: flex; flex-wrap: wrap;">
+            {% if finished_projects %}
+                {% for project in finished_projects %}
+                    <div class="project-item" style="min-width: 300px;">
+                        <img src="{{ url_for('static', filename='images/generic' ~ (range(1,4) | random) ~ '.jpg') }}"
+                            class="project-thumbnail">
+                        <a href="/projects/{{ project.id }}">
+                            <h3>{{ project.event_id }}</h3>
+                        </a>
+                        <h5>Hours worked: {{ project.hours }}</h5>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>This user has no finished projects yet.</p>
+            {% endif %}
+            </div>
 
 </section>
 

@@ -2,11 +2,13 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from app import db, bcrypt
 from app.models import User, VolunteerApplication, Project
+import certification.user_blockchain_service
+import asyncio
 
 auth_bp = Blueprint("auth", __name__)
 
-@auth_bp.route("/profile/<username>")
-def profile(username):
+@auth_bp.route("/profile/<string:username>", methods=["GET", "POST"])
+async def profile(username):
     user = User.query.filter_by(username=username).first_or_404()
 
     # === STATISTIKA ===
@@ -48,15 +50,27 @@ def profile(username):
         "volunteering": currently_volunteering_count,
         "organizing": organizing_count
     }
+    service = certification.user_blockchain_service.UserBlockchainService()
+    projects = await service.get_user_certificates(user.username)
+
+    finished_projects = []
+
+
+    for project in projects:
+        if not project["event_id"].startswith("registration_"):
+            finished_projects.append(project)
+
+    print(*finished_projects, sep="\n")
 
     return render_template(
         "user/user-profile.html",
         user=user,
         stats=stats,
         current_projects=user.applications,   # već koristiš ovo
-        finished_projects=[
-            app for app in user.applications if app.project.finished
-        ]
+        # finished_projects=[
+        #     app for app in user.applications if app.project.finished
+        # ],
+        finished_projects=finished_projects
     )
 
 
