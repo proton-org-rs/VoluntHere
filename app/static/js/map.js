@@ -1,6 +1,6 @@
 // ==========================
-// 1. GEOCODING FUNKCIJA
-// Pretvara string lokacije u latitude/longitude
+// 1. GEOCODING FUNCTION
+// Converting string to longitude and latitude
 // ==========================
 async function geocodeLocation(location) {
     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`;
@@ -24,12 +24,12 @@ async function geocodeLocation(location) {
 
 
 // ==========================
-// 2. INICIJALIZACIJA MAPE
+// 2. INITIALIZATION OF THE MAO
 // ==========================
 document.addEventListener("DOMContentLoaded", async () => {
 
-    // Kreiraj mapu i centriraj na Beograd
-    const map = L.map("map").setView([44.7866, 20.4489], 12);
+    // Create map in the center of Timisoara
+    const map = L.map("map").setView([45.7558, 21.2322], 12);
 
     // OpenStreetMap tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("Leaflet mapa pokrenuta.");
 
     // ==========================
-    // 3. UČITAVANJE PROJEKATA IZ API-ja
+    // LOAD PROJECT FROM API
     // ==========================
     let response;
     try {
@@ -52,14 +52,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const projects = await response.json();
 
     // ==========================
-    // 4. DODAVANJE MARKERA NA MAPU
+    // 4. ADDING MARKERS
     // ==========================
     for (let project of projects) {
 
         if (!project.location || project.location.trim() === "")
             continue;
 
-        // pretvori tekst lokacije u koordinate
+        // convert text to coordinates
         const coords = await geocodeLocation(project.location);
 
         if (!coords) {
@@ -67,10 +67,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             continue;
         }
 
-        // kreiraj marker
+        // create marker
         const marker = L.marker([coords.lat, coords.lon]).addTo(map);
 
-        // popup sa linkom ka projektu
+        // popup linking to the project
         marker.bindPopup(`
             <b>${project.title}</b><br>
             <a href="/projects/${project.id}">View project</a>
