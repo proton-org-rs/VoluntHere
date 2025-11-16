@@ -30,7 +30,7 @@
 .filter-bar {
     position: relative;
     overflow: auto;
-    background: #eefaff;
+    background: rgba(255, 255, 255, 0.32);
     border-radius: 1rem;
     /*border-radius: 3rem;*/
     padding: 1.2rem;
@@ -146,7 +146,8 @@
 
 .project-card{
     margin-bottom: 1.2em;
-    background: #eefaff;
+    background: rgba(255, 255, 255, 0.32);
+    border: solid rgba(113, 113, 113, 0.64);;
     a{
         color: #333;
     }
@@ -170,6 +171,7 @@
     max-width: 100%;
     height: calc(100vh - 20rem);
     border-radius: 0.8rem;
+    box-shadow: 0 8px 1em rgba(0, 0, 0, 0.3);
 }
 
 

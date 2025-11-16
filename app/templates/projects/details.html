@@ -1,23 +1,36 @@
 {% extends "base.html" %}
 {% block title %}{{ project.title }} | VoluntHere{% endblock %}
 
+{% block script %}
+<script src="{{ url_for('static', filename='js/details-illustration.js') }}"></script>
+{% endblock %}
+
+
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/details.css') }}">
 {% endblock %}
 
 {% block content %}
-<div class="project-details">
-    <h1>{{ project.title }}</h1>
-    <p class="details-location">{{ project.location }}</p>
-    <p class="details-description">{{ project.description }}</p>
+<div class="project-details-card">
 
-    {% if current_user.is_authenticated %}
-    <a onclick="joinProject({{ project.id }})" class="btn-primary">Join Project</a>
-    {% if project.owner_id == current_user.id %}
-        <a href='/projects/edit/{{ project.id }}' class="btn-primary">Edit Project</a>
-    {% endif %}
-    {% endif %}
+    <div class="details-content">
+        <h1>{{ project.title }}</h1>
+        <h4>Organized by: <a href="/auth/profile/{{project.owner.username}}">{{project.owner.name}}</a></h4>
+        <p class="details-location">{{ project.location }}</p>
+        <p class="details-description">{{ project.description }}</p>
+
+        {% if current_user.is_authenticated %}
+            <a onclick="joinProject({{ project.id }})" class=" btn-glow">Join Project</a>
+            {% if project.owner_id == current_user.id %}
+                <a href='/projects/edit/{{ project.id }}' class="btn-primary">Edit Project</a>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="details-illustration"></div>
+
 </div>
+
 
 
 <!-- ============================================

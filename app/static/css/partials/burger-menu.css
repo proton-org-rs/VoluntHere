@@ -56,6 +56,30 @@
     z-index: 10;
 }
 
+.highlight-link{
+    color: #1a57d6 !important;
+    text-shadow: rgba(0,64,255,0.43) 0px 0px 60px;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow:
+      0 0 3px #fff,
+      0 0 6px #fff,
+      0 0 8px #0073e6,
+      0 0 10px #0073e6;
+  }
+  to {
+    text-shadow:
+      0 0 5px #fff,
+      0 0 8px #fff,
+      0 0 12px #0073e6,
+      0 0 15px #0073e6;
+  }
+}
+
+
 .burger-menu a {
     display: block;
     padding: 8px 16px;
@@ -72,6 +96,7 @@
 .burger-menu.open {
     display: block;
 }
+
 
 /* Malo prilagođavanje za mobilni */
 @media (max-width: 768px) {
