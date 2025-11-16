@@ -1,125 +1,233 @@
-/* ================================
-   PROFILE HEAD
-================================ */
-
-.profile-head {
-    display: grid;
-    grid-template-columns: 0.2fr 0.5fr 0.3fr;
-    align-items: center;
-    text-align: center;
-    margin: 1rem 3rem 8rem -4rem;
-    max-width: 15rem;
-
-    padding: 2rem;
-    border-radius: 1.3rem;      /* rounded corners */
-    background: radial-gradient(rgba(255,255,255,0.5),rgba(255,255,255,7) 180%);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);  /* soft shadow */
-    img{
-        border-radius: 50%;
-    }
-}
-
-.profile-head .profile-image {
-    padding: 15rem;
-    width: 8.75rem;
-    height: 8.75rem;
-    margin-top: 0.813rem;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 0.938rem;
-}
-
-/* profilna slika */
-.profile-head .profile-image .profile-pic {
-    width: 8rem;
-    height: 8rem;
-    margin-top: -1rem;
-    border-style: double;
-    border-width: 0.5rem;
-}
-
-/* username stil */
-.profile-head .profile-image h1 {
-    display: block;
-    width: fit-content;
-    margin: 0.5rem auto 0 auto;
-    font-size: 1rem;
-
-    border-style: solid;
-    border-width: 0.25rem;
-    border-color: rgba(157, 12, 173, 1);
-    border-radius: 2rem;
-
-    padding: 0.5rem;
-    text-align: center;
-}
-
-.profile-head .social{
-    margin-left: -1rem;
-}
-
-
-/* ================================
-   PROFILE INFO SECTION
-================================ */
-
-.profile-info {
-    width: 80%;
+/* ============================================
+   PROFILE HEADER CONTAINER
+============================================ */
+.profile-header {
     margin: 2rem auto;
+    padding: 2.5rem;
+    width: 85%;
+    background: linear-gradient(135deg, #e9f1ff, #fdeaff);
+    border-radius: 25px;
 
-
-    padding: 2rem;
-    box-sizing: border-box;
-    border-radius: 1rem;
-
-}
-
-.projects-title h1 {
-    text-align: center;
-    font-size: 32pt;
-    margin: 0 0 2rem 0;
-}
-
-/* DOLE STRANA */
-.profile-info-bottom {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0.25fr 0.55fr 0.20fr;
     gap: 2rem;
 
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-/* KARTICE */
-.card {
-    background: rgba(255, 255, 255, 0.75);
-    padding: 0.5rem 2rem;
-    border-radius: 0.625rem;
+/* ============================================
+   LEFT SIDE — PROFILE IMAGE
+============================================ */
+.profile-left img.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* ============================================
+   CENTER — USER INFO
+============================================ */
+.profile-center h1 {
+    font-size: 1.9rem;
+    margin-bottom: 0.2rem;
+}
+
+.profile-center p {
+    margin: 0.3rem 0;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+.profile-buttons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.8rem;
+}
+
+.profile-buttons .btn-primary {
+    background: #1e59ff;
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: box-shadow 0.3s ease-out;
+}
+
+.profile-buttons .btn-secondary {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ============================================
+   TABS (Work / Likes / etc.)
+============================================ */
+.profile-tabs {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.profile-tabs button {
+    background: none;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    color: #666;
+    position: relative;
+}
+
+.profile-tabs button.active {
+    color: #000;
+}
+
+.profile-tabs button.active::after {
+    content: "";
+    position: absolute;
+    width: 60%;
+    height: 3px;
+    background: #1e59ff;
+    bottom: -5px;
+    left: 20%;
+    border-radius: 3px;
+}
+
+/* ============================================
+   RIGHT SIDE — STATS
+============================================ */
+.profile-right {
+    text-align: center;
+}
+
+.stat h2 {
+    margin: 0;
+    font-size: 1.6rem;
+}
+
+.stat p {
+    margin: 0;
+    color: #777;
+}
+
+/* ============================================
+   PROJECT GRID
+============================================ */
+.user-projects {
+    margin: 2rem auto;
+    width: 85%;
+}
+
+.section-title {
+    margin-bottom: 1.2rem;
+}
+
+.project-display-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.8rem;
+}
+
+.project-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.project-thumbnail {
     width: 100%;
-    max-width: none;
-    height: 9.375rem;
-    overflow-y: auto;
-    box-sizing: border-box;
-    border-width: 0.25rem;
-
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
-.card h3 {
-    margin-top: 0;
-    text-shadow: 0 0 0.1rem rgba(255,254,254,1);
-}
-
-
-/* ================================
-   RESPONSIVE
-================================ */
-
+/* ============================================
+   MOBILE RESPONSIVENESS (Phones & Small Tablets)
+============================================ */
 @media (max-width: 768px) {
-    .profile-info {
-        grid-template-columns: 1fr;
-        gap: 1.563rem;
+
+    /* ------- PROFILE HEADER ------- */
+    .profile-header {
+        grid-template-columns: 1fr;   /* sve u jednom stupcu */
+        text-align: center;
+        padding: 1.5rem;
+        gap: 1.5rem;
     }
 
-    .profile-info-left,
-    .profile-info-right {
-        align-items: center;     /* na mobilnom centrirano */
+    /* profilna slika manja */
+    .profile-left img.profile-pic {
+        width: 110px;
+        height: 110px;
+        margin: 0 auto;
+        border-radius: 15px;
+    }
+
+    /* naslov manji */
+    .profile-center h1 {
+        font-size: 1.4rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .profile-center p {
+        font-size: 0.85rem;
+    }
+
+    /* dugmad centrirana i uža */
+    .profile-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+    }
+
+    .profile-buttons .btn-primary,
+    .profile-buttons .btn-secondary {
+        padding: 0.45rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* tabs preko celog ekrana */
+    .profile-tabs {
+        justify-content: center;
+        gap: 0.8rem;
+        margin-top: 1rem;
+    }
+
+    .profile-tabs button {
+        font-size: 0.85rem;
+    }
+
+    /* statovi ispod, centrirani */
+    .profile-right {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1rem;
+    }
+
+    .stat h2 {
+        font-size: 1.2rem;
+    }
+
+
+    /* ------- PROJECT GRID ------- */
+    .project-display-grid {
+        grid-template-columns: 1fr;  /* 1 projekat po redu */
+        gap: 1.2rem;
+    }
+
+    .project-item {
+        padding: 1rem;
+    }
+
+    .project-thumbnail {
+        height: 140px;
     }
 }
+
