@@ -5,7 +5,7 @@ from random import randint
 
 
 async def main():
-    service = certification.user_blockchain_service.UserBlockchainService()
+    service = certification.user_blockchain_service.UserBlockchainService("http://despot-flex7:8899")
 
     user = await service.create_and_register_user("test_user_123", "test@gmail.com", "Test User")
     print(f"Loaded user: {user}")
