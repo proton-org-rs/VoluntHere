@@ -2,10 +2,16 @@
 {% block title %}VoluntHere | Home{% endblock %}
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 {% endblock %}
 {% block script %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="{{ url_for('static', filename='js/tag-filtration.js') }}"></script>
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
 {% endblock %}
+
 {% block content %}
 
 <!-- ===================================
@@ -15,7 +21,6 @@
 
     <!-- Section Title -->
     <div class="section-title">Recent Projects</div>
-
     <!-- Filter Bar -->
     <aside class="filter-bar">
         <h3>Tags</h3>
@@ -45,10 +50,11 @@
     </div>
 
     <!-- Map Image -->
-    <div class="map">
-        <img src="{{ url_for('static', filename='images/map.png') }}" alt="Map View">
-    </div>
+    <div id="map" class="map"></div>
+
 
 </section>
+
+
 
 {% endblock %}

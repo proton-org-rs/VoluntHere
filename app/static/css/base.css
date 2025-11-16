@@ -1,10 +1,33 @@
 /* ---------- GLOBAL ---------- */
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lucida Sans Unicode",cursive;
+    font-weight: bolder;
     margin: 0;
-    background: #fafafa;
-    color: #333;
+    min-height: 10rem;
 }
+
+body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background: radial-gradient(ellipse at top left,
+    rgb(104, 210, 243) 5%,
+    rgb(40, 177, 220) 28%,
+    /*rgb(255, 255, 255) 35%,*/
+    rgb(255, 255, 255) 47%,
+    rgb(194, 90, 198) 70%,
+    rgb(187, 33, 248) 125%);
+    color: rgba(255,254,254, 0.9);
+    width: 200%;
+    height: 250%;
+    transform: rotate(-30deg);
+    transform-origin: bottom left;
+    z-index: -1;
+    pointer-events: none;
+}
+
+
 
 .container {
     padding: 40px 20px;
@@ -18,27 +41,31 @@ body {
 
 /* SEARCH BAR — 70% širine, centriran */
 .header {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 30px;
+    padding: 15px 15px;
     width: 100%;
     box-sizing: border-box;
 
     .logo img {
-        height: 40px;
+        justify-self: start;
+        height: 100px;
         width: auto;
+        filter: drop-shadow(0 0 1.3rem rgb(101, 94, 84));
     }
 
         /* SEARCH BAR (NAVBAR) */
     .search-bar {
-        display: flex;
-        align-items: center;
+        justify-self: right;
+        /*justify-content: center;*/
+        /*align-items: center;*/
         background: #ffffff;
         border-radius: 30px;
         padding: 5px 10px;
         gap: 10px;
-        box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        box-shadow: 0.1rem 0.2rem 1rem rgba(0,0,0,0.25);
 
         input {
         border: none;
@@ -67,8 +94,9 @@ body {
     /* MENU — desna strana */
 
     .menu img {
-        height: 50px;
-        width: 50px;
+        justify-self: center;
+        height: 1em;
+        width: 1em;
         cursor: pointer;
     }
 }
@@ -81,10 +109,24 @@ body {
 }
 
 .btn-secondary {
-    background: #eee;
-    padding: 6px 12px;
-    border-radius: 6px;
+    display: flex;
+    justify-content: flex-end;
+    background: rgba(255, 255, 255, 0.34);
+    color: #2c5ab6;
+    font-family: fantasy Papyrus;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+    justify-self: flex-end;
+    transition: box-shadow 0.3s ease-out
 }
+
+.btn-secondary:hover{
+    box-shadow: 0.1rem 0.1rem 0.8rem rgba(0,0,0,0.3);
+}
+
 
 /* ---------- HERO ---------- */
 .hero {
@@ -106,7 +148,6 @@ body {
     display: inline-block;
     margin-top: 20px;
 }
-
 /* ---------- FEATURES ---------- */
 .features {
     margin-top: 60px;
@@ -131,10 +172,14 @@ body {
 }
 
 .project-card {
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.05);
+    background: rgba(218, 150, 176, 0.32); /* semi-transparent white */
+    backdrop-filter: blur(10px);          /* blur background behind card */
+    /*border: 0.2rem solid rgba(239, 194, 194, 0.15); !* subtle border *!*/
+    border-radius: 16px;                  /* rounded corners */
+    padding: 20px;
+
+    box-shadow: 0 8px 1em rgba(0, 0, 0, 0.3);
+    color: #222;
 }
 
 /* ---------- FORMS ---------- */
@@ -157,10 +202,11 @@ footer {
     text-align: center;
     padding: 30px;
     margin-top: 60px;
-    color: #777;
+    color: #575555;
 
     img{
-        width: 64px;
+        width: 10%;
+        height: 10%;
     }
 }
 
@@ -175,14 +221,15 @@ footer {
 }
 
 .toast {
-    background: #2b2b2b;
-    color: #ffffff;
+    justify-self: center;
+    background: #dcc3c3;
+    color: #000000;
     padding: 14px 22px;
     border-radius: 8px;
     margin-top: 10px;
     font-size: 15px;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(1rem);
     animation: slide-in 0.4s forwards;
 }
 

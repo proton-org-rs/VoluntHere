@@ -1,10 +1,11 @@
+
 /* -------------------------------------------------
    RECENT PROJECTS SECTION
 ---------------------------------------------------*/
 
 .recent-projects {
     display: grid;
-    grid-template-columns: 0.15fr 0.65fr 0.15fr; /* 10% | 75% | 15% (map image may need more space) */
+    grid-template-columns: 0.20fr 0.55fr 0.20fr; /* 10% | 75% | 15% (map image may need more space) */
     gap: 30px;
     margin-top: 40px;
     padding: 0 30px;
@@ -27,20 +28,20 @@
    FILTER BAR — final merged version
 ------------------------------------------*/
 .filter-bar {
-    background: #f2f2f2;
-    border-radius: 10px;
-    padding: 20px;
+    position: relative;
+    overflow: auto;
+    background: linear-gradient(135deg, rgba(105, 224, 236, 0.2) 0%, rgba(175, 234, 230, 0.14) 130%);
+    border-radius: 1rem;
+    /*border-radius: 3rem;*/
+    padding: 1.2rem;
     width: 100%;
+    /*border: solid 0.2rem rgba(134, 186, 202, 0.44);*/
+    box-shadow: 0 0.4rem 0.8rem rgba(0,0,0,0.25);
 
     /* Odvajanje od projekta */
     margin-right: 10px;
-    position: relative;
     height: calc(100vh - 360px);
     z-index: 2;
-
-    /* Adaptive height */
-    max-height: calc(100vh - 360px);
-    overflow-y: auto;
 
     /* Scroll styling */
     &::-webkit-scrollbar {
@@ -108,15 +109,19 @@
 
 /* ---------- PROJECTS (75%) ---------- */
 .projects {
-    background: #ffffff;
     border-radius: 10px;
     height: calc(100vh - 360px);
+    linear-gradient(101deg, rgb(255, 255, 255), rgb(194 137 239 / 27%) 36%, rgb(247 93 228 / 59%) 130%)
     padding: 20px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.05);
     width: 100%;
     overflow-y: auto;
+    /*border-style: solid;*/
 }
 
+.project-card{
+    margin-bottom: 1.2em;
+    background: rgba(197, 168, 168, 0.38);
+}
 
 
 /* ---------- MAP (10%) ---------- */
@@ -125,12 +130,9 @@
     justify-content: flex-end;
     align-items: flex-start;
     width: 100%;
-}
-
-.map img {
     max-width: 100%;
-    height: calc(100vh - 360px);
-    border-radius: 10px;
+    height: calc(100vh - 20rem);
+    border-radius: 0.8rem;
 }
 
 
@@ -159,3 +161,4 @@
         display: none;
     }
 }
+

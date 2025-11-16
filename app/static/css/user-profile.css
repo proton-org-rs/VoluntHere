@@ -3,20 +3,59 @@
 ================================ */
 
 .profile-head {
-    display: flex;
-    flex-direction: column;
-    align-items: center;       /* centriranje */
+    display: grid;
+    grid-template-columns: 0.2fr 0.5fr 0.3fr;
+    align-items: center;
     text-align: center;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin: 1rem 3rem 8rem -4rem;
+    max-width: 15rem;
+
+    padding: 2rem;
+    border-radius: 1.3rem;      /* rounded corners */
+    background: radial-gradient(rgba(255,255,255,0.5),rgba(255,255,255,7) 180%);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);  /* soft shadow */
+    img{
+        border-radius: 50%;
+    }
 }
 
-.profile-head .profile-pic {
-    width: 140px;
-    height: 140px;
+.profile-head .profile-image {
+    padding: 15rem;
+    width: 8.75rem;
+    height: 8.75rem;
+    margin-top: 0.813rem;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 15px;
+    margin-bottom: 0.938rem;
+}
+
+/* profilna slika */
+.profile-head .profile-image .profile-pic {
+    width: 8rem;
+    height: 8rem;
+    margin-top: -1rem;
+    border-style: double;
+    border-width: 0.5rem;
+}
+
+/* username stil */
+.profile-head .profile-image h1 {
+    display: block;
+    width: fit-content;
+    margin: 0.5rem auto 0 auto;
+    font-size: 1rem;
+
+    border-style: solid;
+    border-width: 0.25rem;
+    border-color: rgba(157, 12, 173, 1);
+    border-radius: 2rem;
+
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.profile-head .social{
+    margin-left: -1rem;
 }
 
 
@@ -25,49 +64,47 @@
 ================================ */
 
 .profile-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;   /* leva | desna kolona */
-    gap: 40px;
+    width: 80%;
+    margin: 2rem auto;
 
-    width: 100%;
-    padding: 0 40px;                  /* grljenje containera */
+
+    padding: 2rem;
     box-sizing: border-box;
-    justify-items: center;
+    border-radius: 1rem;
+
 }
 
-
-/* LEVA STRANA */
-.profile-info-left {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    align-items: flex-start;          /* grli levu stranu */
+.projects-title h1 {
+    text-align: center;
+    font-size: 32pt;
+    margin: 0 0 2rem 0;
 }
 
+/* DOLE STRANA */
+.profile-info-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
 
-/* DESNA STRANA */
-.profile-info-right {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    align-items: flex-end;            /* grli desnu stranu */
 }
-
 
 /* KARTICE */
 .card {
-    background: #ffffff;
-    padding: 20px 25px;
-    border-radius: 10px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    background: rgba(255, 255, 255, 0.75);
+    padding: 0.5rem 2rem;
+    border-radius: 0.625rem;
     width: 100%;
-    max-width: 500px;                 /* da se ne širi beskonačno */
-    height: 150px;
+    max-width: none;
+    height: 9.375rem;
     overflow-y: auto;
+    box-sizing: border-box;
+    border-width: 0.25rem;
+
 }
 
 .card h3 {
     margin-top: 0;
+    text-shadow: 0 0 0.1rem rgba(255,254,254,1);
 }
 
 
@@ -75,10 +112,10 @@
    RESPONSIVE
 ================================ */
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
     .profile-info {
         grid-template-columns: 1fr;
-        gap: 25px;
+        gap: 1.563rem;
     }
 
     .profile-info-left,
