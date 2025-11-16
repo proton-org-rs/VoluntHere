@@ -6,7 +6,7 @@
 
 <div class="project-grid">
     {% for project in projects %}
-    <div class="project-card">
+    <div class="project-card" style=" box-shadow: 0 8px 1em rgba(0, 0, 0, 0.3);">
         <h2>{{ project.title }}</h2>
         <p>{{ project.short_description }}</p>
         <a href="/projects/{{ project.id }}" class="btn-secondary">View Details</a>
