@@ -10,7 +10,7 @@
     <div class="project-card" style=" box-shadow: 0 8px 1em rgba(0, 0, 0, 0.3);">
         <h2>{{ project.title }}</h2>
         <p>{{ project.short_description }}</p>
-        <p>status: {% if project.approved %}Approved by an admin{% else %}Waiting for approval{% endif %}</p>
+        <p>status: {% if project.suspended %}Suspended by an admin{% elif project.approved %}Approved by an admin{% else %} Waiting for approval{% endif %}</p>
         <div class="project-actions">
             <a href="/projects/{{ project.id }}" class="btn-secondary">View Details</a>
             {% if project.owner_id == current_user.id %}
