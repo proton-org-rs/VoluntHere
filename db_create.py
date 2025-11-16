@@ -71,7 +71,7 @@ def init_db():
                 title="Park Cleanup",
                 short_description="Cleaning up our local community park.",
                 description="Volunteers gather to clean trash and improve the environment.",
-                location="Central Park",
+                location="Timișoara 300028",
                 owner_id=1,
                 approved=True,
                 tags=get_tags("cleanup", "environment", "community")
@@ -80,7 +80,7 @@ def init_db():
                 title="Community Movie Night",
                 short_description="Outdoor cinema for the neighborhood.",
                 description="Volunteers organize an outdoor movie screening with snacks.",
-                location="Town Square",
+                location="Piața Victoriei, Timișoara",
                 owner_id=1,
                 approved=True,
                 tags=get_tags("community", "outdoor")
@@ -89,7 +89,7 @@ def init_db():
                 title="STEM Kids Workshop",
                 short_description="Robotics workshop for young students.",
                 description="Interactive robotics & coding workshop for kids aged 10–14.",
-                location="Local School Lab",
+                location="Strada Doctor Iosif Nemoianu 5, Timișoara",
                 owner_id=1,
                 approved=True,
                 tags=get_tags("STEM", "tech", "kids", "education")
@@ -98,7 +98,7 @@ def init_db():
                 title="Food Drive",
                 short_description="Collecting food donations for families in need.",
                 description="A community-led initiative to gather food supplies.",
-                location="Donation Center",
+                location="Strada Alexandru Odobescu 3, Timișoara 300425",
                 owner_id=1,
                 approved=True,
                 tags=get_tags("charity", "community")
@@ -107,7 +107,7 @@ def init_db():
                 title="Plant a Tree Day",
                 short_description="Tree-planting event for cleaner air.",
                 description="Volunteers plant young trees in the community forest.",
-                location="Forest Park",
+                location="Splaiul Nicolae Titulescu 1, Timișoara",
                 owner_id=1,
                 approved=True,
                 tags=get_tags("environment", "forest", "outdoor")
@@ -116,7 +116,7 @@ def init_db():
                 title="Animal Shelter Help",
                 short_description="Assist local animal shelter with care tasks.",
                 description="Feeding, grooming, and playing with shelter animals.",
-                location="City Shelter",
+                location="Piața Victoriei 4, Timișoara 300006",
                 owner_id=1,
                 approved=False,
                 tags=get_tags("animals", "charity")

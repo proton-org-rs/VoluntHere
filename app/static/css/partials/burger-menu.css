@@ -1,9 +1,10 @@
 /* ---------- BURGER IKONICA + MENI ---------- */
 
 .menu {
-    position: relative;
-    display: flex;
-    align-items: center;
+    position: absolute;
+    top: 2rem;     /* udaljenost od vrha */
+    right: 2rem;   /* udaljenost od desnog ruba */
+    z-index: 9999; /* da bude iznad svega */
 }
 
 /* Dugme */
@@ -11,10 +12,10 @@
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
+    padding: 0.2rem;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0.3rem;
 }
 
 /* Tri linije */
@@ -23,7 +24,7 @@
     width: 24px;
     height: 2px;
     background: #333;
-    border-radius: 2px;
+    border-radius: 3px;
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
@@ -46,7 +47,7 @@
     top: 100%;
     right: 0;
     margin-top: 8px;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.7);
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.12);
     padding: 10px 0;
@@ -54,6 +55,30 @@
     display: none;
     z-index: 10;
 }
+
+.highlight-link{
+    color: #1a57d6 !important;
+    text-shadow: rgba(0,64,255,0.43) 0px 0px 60px;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow:
+      0 0 3px #fff,
+      0 0 6px #fff,
+      0 0 8px #0073e6,
+      0 0 10px #0073e6;
+  }
+  to {
+    text-shadow:
+      0 0 5px #fff,
+      0 0 8px #fff,
+      0 0 12px #0073e6,
+      0 0 15px #0073e6;
+  }
+}
+
 
 .burger-menu a {
     display: block;
@@ -71,6 +96,7 @@
 .burger-menu.open {
     display: block;
 }
+
 
 /* Malo prilagođavanje za mobilni */
 @media (max-width: 768px) {

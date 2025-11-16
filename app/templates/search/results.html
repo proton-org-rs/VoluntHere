@@ -12,6 +12,7 @@
         {% for u in users %}
             <li>
                 <a href="/profile/{{ u.id }}">
+                    <img class="search-profile-pic" src="{{ u.profile-pic }}" alt="XD">
                     <strong>{{ u.username }}</strong> — {{ u.name }}
                 </a>
             </li>
