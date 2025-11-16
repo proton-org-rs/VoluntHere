@@ -51,27 +51,26 @@ async def profile(username):
         "organizing": organizing_count
     }
     service = certification.user_blockchain_service.UserBlockchainService()
+    projects = await service.get_user_certificates(user.username)
 
-    for app in applications:
-        if app.project.finished:
-            # ovde treba preci na sistem gde se cita sa blockchain-a umesto iz baze
-            projects = await service.get_user_certificates(user.username)
+    finished_projects = []
 
-            for project in projects:
-                if not project["event_id"].startswith("registration_"):
-                    finished_projects.append(project)
 
-        else:
-            current_projects.append(app)
+    for project in projects:
+        if not project["event_id"].startswith("registration_"):
+            finished_projects.append(project)
+
+    print(*finished_projects, sep="\n")
 
     return render_template(
         "user/user-profile.html",
         user=user,
         stats=stats,
         current_projects=user.applications,   # već koristiš ovo
-        finished_projects=[
-            app for app in user.applications if app.project.finished
-        ]
+        # finished_projects=[
+        #     app for app in user.applications if app.project.finished
+        # ],
+        finished_projects=finished_projects
     )
 
 

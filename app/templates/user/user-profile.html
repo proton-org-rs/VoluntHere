@@ -124,7 +124,7 @@
 <!-- ==========================
      PROJECTS SECTION
 ========================== -->
-<section class="user-projects">
+<section class="user-projects" style="width: 100vw;">
     <h2 class="section-title">User Projects</h2>
 
     <div class="project-display-grid">
@@ -135,24 +135,28 @@
                 <a href="/projects/{{ application.project.id }}"><h3>{{ application.project.title }}</h3> </a>
                 <h5>Organized by: <a href="/auth/profile/{{application.project.owner.username}}">{{ application.project.owner.name }}</a></h5>
                 <p>{{ application.project.short_description }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
         <!-- PREVIOUS PROJECTS -->
-        <div class="previous-list card">
-            <h3>Previous Projects</h3>
+        <h3>Previous Projects</h3>
+        <div class="project-display-grid" style="display: flex; flex-wrap: wrap;">
             {% if finished_projects %}
-                <ul>
                 {% for project in finished_projects %}
-                    <li>
-                        <strong>{{ project.event_id }}</strong>
-                        <p>Hours worked: {{ project.hours }}</p>
-                    </li>
+                    <div class="project-item" style="min-width: 300px;">
+                        <img src="{{ url_for('static', filename='images/generic' ~ (range(1,4) | random) ~ '.jpg') }}"
+                            class="project-thumbnail">
+                        <a href="/projects/{{ project.id }}">
+                            <h3>{{ project.event_id }}</h3>
+                        </a>
+                        <h5>Hours worked: {{ project.hours }}</h5>
+                    </div>
                 {% endfor %}
-                </ul>
             {% else %}
                 <p>This user has no finished projects yet.</p>
             {% endif %}
             </div>
-        {% endfor %}
-    </div>
 
 </section>
 
