@@ -1,18 +1,48 @@
 {% extends "base.html" %}
 {% block title %}{{ project.title }} | VoluntHere{% endblock %}
 
-
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/details.css') }}">
+{% endblock %}
 
 {% block content %}
 <div class="project-details">
     <h1>{{ project.title }}</h1>
     <p class="details-location">{{ project.location }}</p>
     <p class="details-description">{{ project.description }}</p>
+
     {% if current_user.is_authenticated %}
     <a onclick="joinProject({{ project.id }})" class="btn-primary">Join Project</a>
-    {% if project.owner_id == current_user.id%}
+    {% if project.owner_id == current_user.id %}
         <a href='/projects/edit/{{ project.id }}' class="btn-primary">Edit Project</a>
     {% endif %}
     {% endif %}
 </div>
+
+
+<!-- ============================================
+     PARTICIPANTS SECTION
+=============================================== -->
+{% if project.applications %}
+<h2 class="participants-title">Participants</h2>
+
+<div class="participants-grid">
+
+    {% for app in project.applications %}
+    <a href="/auth/profile/{{ app.user.username }}" class="participant-card">
+
+        <img src="{{ app.user.profile_pic or url_for('static', filename='images/default-profile.png') }}"
+             alt="Profile"
+             class="participant-img">
+
+        <div class="participant-info">
+            <h3>{{ app.user.name }}</h3>
+        </div>
+
+    </a>
+    {% endfor %}
+
+</div>
+{% endif %}
+
 {% endblock %}

@@ -40,11 +40,21 @@ document.addEventListener("DOMContentLoaded", () => {
         // USERS
         if (data.users.length > 0) {
             html += `<div class="category">Users</div>`;
+
             data.users.forEach(u => {
+                console.log(u)
+                // Ako korisnik nema sliku → koristi default
+                const imgSrc = u.profile_pic && u.profile_pic !== ""
+                    ? u.profile_pic
+                    : "/static/images/default-profile.png";
+
                 html += `
                     <a href="/auth/profile/${u.username}" class="result-item">
-                        <strong>${u.username}</strong>
-                        <span>${u.name}</span>
+                        <img class="search-profile-pic" src="${imgSrc}" alt="${u.username}">
+                        <div class="result-text">
+                            <strong>${u.username}</strong>
+                            <span>${u.name}</span>
+                        </div>
                     </a>
                 `;
             });
