@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Projects dashboard | VoluntHere{% endblock %}
 {% block script %} <script src='{{ url_for("static", filename="js/edit-project.js") }}'></script> {% endblock %}
+{% block style %} <link rel="stylesheet" href="{{ url_for('static', filename='css/project-dashboard.css') }}"> {% endblock %}
 {% block content %}
 <h1 class="page-title">My active projects</h1>
 
@@ -10,10 +11,12 @@
         <h2>{{ project.title }}</h2>
         <p>{{ project.short_description }}</p>
         <p>status: {% if project.approved %}Approved by an admin{% else %}Waiting for approval{% endif %}</p>
-        <a href="/projects/{{ project.id }}" class="btn-secondary">View Details</a>
-        {% if project.owner_id == current_user.id%}
-            <a href='/projects/edit/{{ project.id }}' class="btn-primary">Edit Project</a>
-        {% endif %}
+        <div class="project-actions">
+            <a href="/projects/{{ project.id }}" class="btn-secondary">View Details</a>
+            {% if project.owner_id == current_user.id %}
+                <a href='/projects/edit/{{ project.id }}' class="btn-primary">Edit Project</a>
+            {% endif %}
+        </div>
     </div>
     {% endfor %}
 </div>
