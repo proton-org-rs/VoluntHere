@@ -78,3 +78,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
 });
+
+setTimeout(() => {
+    map.invalidateSize();
+}, 200);
+
+window.addEventListener("resize", () => {
+    map.invalidateSize();
+});

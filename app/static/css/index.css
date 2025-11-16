@@ -167,7 +167,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
-    width: 100%;
+    min-width: 100% !important;
     max-width: 100%;
     height: calc(100vh - 20rem);
     border-radius: 0.8rem;
@@ -183,21 +183,48 @@
 @media (max-width: 1100px) {
     .recent-projects {
         grid-template-columns: 0.15fr 1fr; /* filter shrinks, map disappears */
-    }
-
     .map {
-        display: none;
+    display: block !important;
+}
     }
 }
 
 @media (max-width: 768px) {
 
     .recent-projects {
-        grid-template-columns: 1fr; /* single column layout */
+        display: grid;
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto auto auto auto;
+        row-gap: 20px;
     }
 
     .filter-bar {
-        display: none;
+        display: none !important;
+    }
+
+    .section-title {
+        order: 1;
+        grid-column: 1;
+    }
+
+    .projects {
+        order: 2;
+        grid-column: 1;
+        width: 100%;
+        height: auto;
+        margin-left: 0;
+        max-height: none;
+    }
+
+    .map {
+        order: 3;
+        grid-column: 1;
+        display: block !important;
+        width: 100% !important;
+        height: 300px !important;
     }
 }
+
+
+
 
