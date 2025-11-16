@@ -78,10 +78,10 @@
             <h3>Previous Projects</h3>
             {% if finished_projects %}
                 <ul>
-                {% for application in finished_projects %}
+                {% for project in finished_projects %}
                     <li>
-                        <strong>{{ application.project.title }}</strong>
-                        <p>{{ application.project.short_description }}</p>
+                        <strong>{{ project.event_id }}</strong>
+                        <p>Hours worked: {{ project.hours }}</p>
                     </li>
                 {% endfor %}
                 </ul>

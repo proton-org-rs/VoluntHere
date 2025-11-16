@@ -2,11 +2,13 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from app import db, bcrypt
 from app.models import User
+import certification.user_blockchain_service
+import asyncio
 
 auth_bp = Blueprint("auth", __name__)
 
 @auth_bp.route("/profile/<string:username>", methods=["GET", "POST"])
-def profile(username):
+async def profile(username):
     user = User.query.filter_by(username=username).first_or_404()
 
     applications = user.applications
@@ -14,9 +16,17 @@ def profile(username):
     current_projects = []
     finished_projects = []
 
+    service = certification.user_blockchain_service.UserBlockchainService()
+
     for app in applications:
         if app.project.finished:
-            finished_projects.append(app)
+            # ovde treba preci na sistem gde se cita sa blockchain-a umesto iz baze
+            projects = await service.get_user_certificates(user.username)
+
+            for project in projects:
+                if not project["event_id"].startswith("registration_"):
+                    finished_projects.append(project)
+
         else:
             current_projects.append(app)
 

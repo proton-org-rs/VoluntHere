@@ -4,6 +4,8 @@ from app import db
 from app.models import User
 from urllib.parse import urlencode
 import os
+import certification.user_blockchain_service
+import asyncio
 
 auth0_bp = Blueprint("auth0", __name__)
 
@@ -29,7 +31,7 @@ def generate_unique_username(base_username):
 
 
 @auth0_bp.route("/callback")
-def callback():
+async def callback():
     token = current_app.auth0.authorize_access_token()
     userinfo = token.get("userinfo")
 
@@ -61,6 +63,10 @@ def callback():
             user.profile_pic = avatar
 
     db.session.commit()
+
+    service = certification.user_blockchain_service.UserBlockchainService()
+    user_wallet = await service.create_and_register_user(user.username, user.email, user.name)
+
     login_user(user)
 
     return redirect(url_for("main.index"))
