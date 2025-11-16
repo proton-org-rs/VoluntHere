@@ -54,6 +54,7 @@
                     <a href="/auth/login">Login</a>
                 {% else %}
                     <a href="/auth/profile/{{ current_user.username }}">Profile</a>
+                    <a href="/projects/create-project">Create a project</a>
                     <a href="/projects/project-dashboard">Projects dashboard</a>
                     {% if current_user.role == "admin" or current_user.role == "super_admin" %}
                         <a href="/admin/dashboard">Admin dashboard</a>
@@ -84,8 +85,6 @@
         <p>© 2025 VoluntHere — developed by Proton ETF 1 at UniHack</p>
         <a href="https://proton.org.rs" target="_blank"><img src="{{ url_for('static', filename='images/proton_logo.png') }}" alt="Proton Logo"></a>
     </footer>
-
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 
 </body>
 
