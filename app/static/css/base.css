@@ -261,3 +261,9 @@ footer {
     }
 }
 
+@media (max-width: 768px) {
+    body::before{
+        width: 400%;
+    }
+
+}

@@ -7,82 +7,75 @@
 
 {% block content %}
 
-<section class="profile-head">
-    <img src="{{ user.profile_pic or url_for('static', filename='images/default-profile.png') }}"
-     alt="Profile picture" class="profile-pic">
-    <h1>{{ user.username }}</h1>
-</section>
+<section class="profile-header">
 
-<section class="profile-info">
-
-
-
-     <!-- SOCIAL -->
-    <div class="social card">
-        <h3>Social Links</h3>
-
-        {% if user.facebook or user.instagram or user.linkedin %}
-            {% if user.facebook %}
-            <p><strong>Facebook:</strong> <a href="{{ user.facebook }}" target="_blank">{{ user.facebook }}</a></p>
-            {% endif %}
-            {% if user.instagram %}
-            <p><strong>Instagram:</strong> <a href="{{ user.instagram }}" target="_blank">{{ user.instagram }}</a></p>
-            {% endif %}
-            {% if user.linkedin %}
-            <p><strong>LinkedIn:</strong> <a href="{{ user.linkedin }}" target="_blank">{{ user.linkedin }}</a></p>
-            {% endif %}
-        {% else %}
-            <p>No social links added yet.</p>
-        {% endif %}
+    <!-- LEFT: PROFILE IMAGE -->
+    <div class="profile-left">
+        <img src="{{ user.profile_pic or url_for('static', filename='images/default-profile.png') }}"
+             alt="Profile picture"
+             class="profile-pic">
     </div>
 
-</section>
+    <!-- CENTER: USER INFO -->
+    <div class="profile-center">
+        <h1>{{ user.name or user.username }}</h1>
+        <p class="profile-location">"Location unknown"</p>
+        <p class="profile-bio">"This user has not added a bio yet."</p>
 
-<section class="profile-info">
-
-    <div class="projects-title">
-        <h1>PROJECTS</h1>
-    </div>
-    <!-- RIGHT COLUMN -->
-    <div class="profile-info-bottom">
-
-        <!-- CURRENT PROJECTS -->
-        <div class="current-projects card">
-            <h3>Current Projects</h3>
-
-            {% if current_projects %}
-                <ul>
-                {% for application in current_projects %}
-                    <li>
-                        <strong>{{ application.project.title }}</strong>
-                        <p>{{ application.project.short_description }}</p>
-                    </li>
-                {% endfor %}
-                </ul>
-            {% else %}
-                <p>This user is not participating in any active projects.</p>
-            {% endif %}
+        <div class="profile-buttons">
+            <button class="btn-primary">Follow</button>
+            <button class="btn-secondary">Get in touch</button>
         </div>
 
+        <!-- Tabs -->
+        <div class="profile-tabs">
+            <button class="active">Work</button>
+            <button>Socials</button>
+            <button>Current projects</button>
+            <button>About</button>
+        </div>
+    </div>
 
-        <!-- PREVIOUS PROJECTS -->
-        <div class="previous-list card">
-            <h3>Previous Projects</h3>
-            {% if finished_projects %}
-                <ul>
-                {% for application in finished_projects %}
-                    <li>
-                        <strong>{{ application.project.title }}</strong>
-                        <p>{{ application.project.short_description }}</p>
-                    </li>
-                {% endfor %}
-                </ul>
-            {% else %}
-                <p>This user has no finished projects yet.</p>
-            {% endif %}
-            </div>
+    <div class="profile-right">
+        <div class="stat">
+            <h2>{{ stats.finished }}</h2>
+            <p>Finished projects</p>
+        </div>
+
+        <div class="stat">
+            <h2>{{ stats.volunteering }}</h2>
+            <p>Currently volunteering</p>
+        </div>
+
+        <div class="stat">
+            <h2>{{ stats.organizing }}</h2>
+            <p>Organizing</p>
+        </div>
     </div>
 
 </section>
+
+<hr class="separator">
+
+<!-- ==========================
+     PROJECTS SECTION
+========================== -->
+<section class="user-projects">
+    <h2 class="section-title">User Projects</h2>
+
+    <div class="project-display-grid">
+        {% for application in current_projects %}
+            <div class="project-item">
+                <img src="{{ url_for('static', filename='images/generic' ~ (range(1,4) | random) ~ '.jpg') }}"
+                     class="project-thumbnail">
+                <a href="/projects/{{ application.project.id }}"><h3>{{ application.project.title }}</h3> </a>
+                <h5>Organized by: <a href="/auth/profile/{{application.project.owner.username}}">{{ application.project.owner.name }}</a></h5>
+                <p>{{ application.project.short_description }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+</section>
+
 
 {% endblock %}
