@@ -1,30 +1,33 @@
 /* ---------- GLOBAL ---------- */
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lucida Sans Unicode",cursive;
+    font-weight: bolder;
     margin: 0;
-    background: radial-gradient(circle at top left,
-    rgb(104, 210, 243) 0%,
-    rgb(40, 177, 220) 15%,
-    rgb(255, 255, 255) 35%,
-    rgb(255, 255, 255) 50%,
-    rgb(194, 90, 198) 80%,
-    rgb(129, 68, 236) 100%);
-    color: rgba(255,254,254, 0.9)
+    min-height: 10rem;
+}
+
+body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background: radial-gradient(ellipse at top left,
+    rgb(104, 210, 243) 5%,
+    rgb(40, 177, 220) 28%,
+    /*rgb(255, 255, 255) 35%,*/
+    rgb(255, 255, 255) 47%,
+    rgb(194, 90, 198) 70%,
+    rgb(187, 33, 248) 125%);
+    color: rgba(255,254,254, 0.9);
+    width: 200%;
+    height: 250%;
+    transform: rotate(-30deg);
+    transform-origin: bottom left;
+    z-index: -1;
+    pointer-events: none;
 }
 
 
-body::before {
-  content: '';
-  position: absolute;
-  width: 60%;
-  height: 60%;
-  background: rgba(255, 4, 153, 0.32);
-  border-radius: 50%;
-  filter: blur(150px);
-  top: 10%;
-  left: 20%;
-  z-index: -1;
-}
 
 .container {
     padding: 40px 20px;
@@ -62,7 +65,7 @@ body::before {
         border-radius: 30px;
         padding: 5px 10px;
         gap: 10px;
-        box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        box-shadow: 0.1rem 0.2rem 1rem rgba(0,0,0,0.25);
 
         input {
         border: none;
@@ -117,12 +120,13 @@ body::before {
     padding: 0.5rem;
     border-radius: 0.4rem;
     justify-self: flex-end;
+    transition: box-shadow 0.3s ease-out
 }
 
 .btn-secondary:hover{
-    background: green;
-    border: 1em, 3em;
+    box-shadow: 0.1rem 0.1rem 0.8rem rgba(0,0,0,0.3);
 }
+
 
 /* ---------- HERO ---------- */
 .hero {
@@ -168,13 +172,13 @@ body::before {
 }
 
 .project-card {
-    background: rgba(247, 215, 248, 0.38); /* semi-transparent white */
+    background: rgba(247, 215, 248, 0.5); /* semi-transparent white */
     backdrop-filter: blur(10px);          /* blur background behind card */
-    border: 0.2em solid rgba(223, 63, 63, 0.4); /* subtle border */
+    border: 0.2rem solid rgba(239, 194, 194, 0.15); /* subtle border */
     border-radius: 16px;                  /* rounded corners */
     padding: 20px;
 
-    box-shadow: 0 8px 1em rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 1em rgba(0, 0, 0, 0.3);
     color: #222;
 }
 
@@ -198,11 +202,7 @@ footer {
     text-align: center;
     padding: 30px;
     margin-top: 60px;
-    color: #777;
-
-    img{
-        width: 64px;
-    }
+    color: #575555;
 }
 
 /* ---------- TOAST ---------- */
