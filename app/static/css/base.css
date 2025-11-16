@@ -203,6 +203,10 @@ footer {
     padding: 30px;
     margin-top: 60px;
     color: #575555;
+
+    img{
+        width:64px;
+    }
 }
 
 /* ---------- TOAST ---------- */
