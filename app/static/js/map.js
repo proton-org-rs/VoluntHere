@@ -1,15 +1,17 @@
 // ==========================
 // 1. GEOCODING FUNCTION
-// Converting string to longitude and latitude
+// Converting string to latitude and longitude
 // ==========================
 async function geocodeLocation(location) {
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`;
+    if (!location || location.trim() === "") return null;
+
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}&limit=1`;
 
     try {
         const response = await fetch(url);
         const data = await response.json();
 
-        if (data.length === 0) return null;
+        if (!data || data.length === 0) return null;
 
         return {
             lat: parseFloat(data[0].lat),
@@ -24,14 +26,14 @@ async function geocodeLocation(location) {
 
 
 // ==========================
-// 2. INITIALIZATION OF THE MAO
+// 2. INITIALIZATION OF THE MAP
 // ==========================
 document.addEventListener("DOMContentLoaded", async () => {
 
-    // Create map in the center of Timisoara
+    // Create map (centered on Timisoara)
     const map = L.map("map").setView([45.7558, 21.2322], 12);
 
-    // OpenStreetMap tile layer
+    // Tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
     }).addTo(map);
@@ -39,50 +41,61 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("Leaflet mapa pokrenuta.");
 
     // ==========================
-    // LOAD PROJECT FROM API
+    // 3. LOAD APPROVED PROJECTS
     // ==========================
     let response;
+
     try {
         response = await fetch("/api/projects");
     } catch (e) {
-        console.error("Ne mogu da dohvatim /api/projects!");
+        console.error("Ne mogu da dohvatim /api/projects");
         return;
     }
 
     const projects = await response.json();
 
+
     // ==========================
-    // 4. ADDING MARKERS
+    // 4. PARALLEL GEOCODING (FASTER)
     // ==========================
-    for (let project of projects) {
+    const geocodePromises = projects.map(p =>
+        geocodeLocation(p.location)
+    );
 
-        if (!project.location || project.location.trim() === "")
-            continue;
+    // All lookups run in parallel
+    const coordsArray = await Promise.all(geocodePromises);
 
-        // convert text to coordinates
-        const coords = await geocodeLocation(project.location);
 
-        if (!coords) {
-            console.warn("Nema koordinata za:", project.location);
-            continue;
-        }
+    // ==========================
+    // 5. ADD MARKERS TO MAP
+    // ==========================
+    projects.forEach((project, i) => {
+        const coords = coordsArray[i];
 
-        // create marker
+        if (!coords) return;
+
         const marker = L.marker([coords.lat, coords.lon]).addTo(map);
 
-        // popup linking to the project
         marker.bindPopup(`
             <b>${project.title}</b><br>
             <a href="/projects/${project.id}">View project</a>
         `);
-    }
+    });
+
+
+    // FIX MAP IF HIDDEN IN FLEX GRID
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 150);
 
 });
 
-setTimeout(() => {
-    map.invalidateSize();
-}, 200);
 
+// ==========================
+// 6. UPDATE MAP ON WINDOW RESIZE
+// ==========================
 window.addEventListener("resize", () => {
-    map.invalidateSize();
+    if (window.map) {
+        window.map.invalidateSize();
+    }
 });
