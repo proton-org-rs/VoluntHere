@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from .config import Config
+from app.routes.map import map_bp
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -38,5 +39,6 @@ def create_app():
     app.register_blueprint(projects_bp, url_prefix="/projects")
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(admin_bp, url_prefix="/admin")
+    app.register_blueprint(map_bp)
 
     return app
