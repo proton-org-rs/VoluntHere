@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-from app.models import Project
+from app.models import Project, Tag
 
 main_bp = Blueprint("main", __name__)
 
@@ -14,4 +14,5 @@ def index():
         .limit(3)
         .all()
     )
-    return render_template("index.html", projects=projects)
+    tags = Tag.query.all()
+    return render_template("index.html", projects=projects, tags=tags)

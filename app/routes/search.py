@@ -1,5 +1,5 @@
 from flask import Blueprint, request, render_template, jsonify
-from app.models import User, Project
+from app.models import User, Project, Tag
 from sqlalchemy import or_
 
 search_bp = Blueprint("search", __name__)
@@ -41,20 +41,31 @@ def search_ajax():
     query = request.args.get("q", "").strip()
 
     if not query:
-        return jsonify({"users": [], "projects": []})
+        return jsonify({"users": [], "projects": [], "tags": []})
 
+    # USER SEARCH
     users = User.query.filter(
+        User.role != "suspended",
         or_(
             User.username.ilike(f"%{query}%"),
             User.name.ilike(f"%{query}%")
         )
     ).limit(5).all()
 
+    # PROJECT SEARCH
     projects = Project.query.filter(
+        Project.approved.is_(True),
+        Project.suspended.is_(False),
         or_(
             Project.title.ilike(f"%{query}%"),
-            Project.short_description.ilike(f"%{query}%")
+            Project.short_description.ilike(f"%{query}%"),
+            Project.location.ilike(f"%{query}%")
         )
+    ).limit(5).all()
+
+    # Tag search
+    tags = Tag.query.filter(
+        Tag.name.ilike(f"%{query}%")
     ).limit(5).all()
 
     return jsonify({
@@ -65,6 +76,11 @@ def search_ajax():
         "projects": [
             {"id": p.id, "title": p.title, "desc": p.short_description}
             for p in projects
+        ],
+        "tags": [
+            {"name": t.name}
+            for t in tags
         ]
     })
+
 

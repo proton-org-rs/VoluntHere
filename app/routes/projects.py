@@ -1,10 +1,15 @@
+import json
+from asyncio import wait_for
+from os import waitpid
+
 import jsonify
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from flask import jsonify
 from flask_login import current_user, login_required
 from app import db
-from app.models import Project, VolunteerApplication
+from app.models import Project, VolunteerApplication, Tag
 from datetime import datetime
+from flask import flash
 
 projects_bp = Blueprint("projects", __name__)
 
@@ -74,6 +79,95 @@ def edit_project(project_id):
         project.finished = bool(request.form.get("finished"))
         db.session.commit()
         return render_template("projects/edit-project.html", project=project)
+
+@projects_bp.route("/filter/tag/<tag_name>")
+def filter_by_tag(tag_name):
+    tag_name = tag_name.lower()
+
+    tag = Tag.query.filter_by(name=tag_name).first_or_404()
+
+    projects = (
+        Project.query
+        .join(Project.tags)
+        .filter(
+            Tag.name == tag_name,
+            Project.approved.is_(True),
+            Project.suspended.is_(False),
+            Project.finished.is_(False)
+        )
+        .order_by(Project.created_at.desc())
+        .limit(3)
+        .all()
+    )
+
+    return jsonify([
+        {
+            "id": p.id,
+            "title": p.title,
+            "short_description": p.short_description
+        }
+        for p in projects
+    ])
+
+# ==========================
+# TAG SEARCH API ENDPOINT
+# ==========================
+@projects_bp.route("/api/tags/search")
+def search_tags():
+    q = request.args.get("q", "").strip()
+    if not q:
+        return jsonify([])
+
+    tags = Tag.query.filter(Tag.name.ilike(f"%{q}%")).all()
+    return jsonify([{"id": t.id, "name": t.name} for t in tags])
+
+
+# ==========================
+# CREATE PROJECT
+# ==========================
+
+@projects_bp.route("/create-project", methods=["GET", "POST"])
+@login_required
+def create_project():
+    if request.method == "POST":
+        title = request.form.get("title")
+        short_description = request.form.get("short_description")
+        description = request.form.get("description")
+        location = request.form.get("location")
+
+        date_raw = request.form.get("date")
+        date = datetime.strptime(date_raw, "%Y-%m-%d").date()
+
+        tag_names_raw = request.form.get("tags")
+        tag_names = json.loads(tag_names_raw) if tag_names_raw else []
+
+        project = Project(
+            title=title,
+            short_description=short_description,
+            description=description,
+            location=location,
+            date=date,
+            owner_id=current_user.id,
+            approved=False,
+            suspended=False,
+        )
+
+        for name in tag_names:
+            tag = Tag.query.filter_by(name=name).first()
+            if not tag:
+                tag = Tag(name=name)
+                db.session.add(tag)
+            project.tags.append(tag)
+
+        db.session.add(project)
+        db.session.commit()
+
+
+        return redirect(url_for("projects.create_project", msg="created"))
+
+    return render_template("projects/create-project.html")
+
+
 
 
 

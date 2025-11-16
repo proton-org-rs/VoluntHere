@@ -5,10 +5,10 @@
 
 .recent-projects {
     display: grid;
-    grid-template-columns: 0.1fr 0.75fr 0.15fr; /* 10% | 75% | 15% (map image may need more space) */
-    gap: 4rem;
-    margin-top: 0.3rem;
-    padding: 0 4rem;
+    grid-template-columns: 0.15fr 0.65fr 0.15fr; /* 10% | 75% | 15% (map image may need more space) */
+    gap: 30px;
+    margin-top: 40px;
+    padding: 0 30px;
     align-items: start;
     justify-content: space-around;
 }
@@ -24,7 +24,9 @@
 
 
 
-/* ---------- FILTER BAR (10%) ---------- */
+/* -----------------------------------------
+   FILTER BAR — final merged version
+------------------------------------------*/
 .filter-bar {
     position: relative;
     overflow: visible;
@@ -37,8 +39,74 @@
     border: solid 0.2rem rgba(134, 186, 202, 0.44);
     box-shadow: 0 0.4rem 0.8rem rgba(0,0,0,0.25);
 
-    .filter-list{
+    /* Odvajanje od projekta */
+    margin-right: 10px;
+    position: relative;
+    height: calc(100vh - 360px);
+    z-index: 2;
+
+    /* Adaptive height */
+    max-height: calc(100vh - 360px);
+    overflow-y: auto;
+
+    /* Scroll styling */
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #c7c7c7;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+
+    scrollbar-width: thin;
+    scrollbar-color: #c7c7c7 transparent;
+
+    /* ---- Filter list ---- */
+    .filter-list {
         list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .tag-filter-btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            width: 100%;
+            padding: 8px 14px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            transition: 0.2s ease-in-out;
+
+            &:hover {
+                background: #eaeaea;
+            }
+
+            &.active {
+                background: #dce4ff;
+                border-color: #7ea1ff;
+                color: #1a57d6;
+                font-weight: 600;
+            }
+        }
     }
 }
 
@@ -47,11 +115,12 @@
 
 /* ---------- PROJECTS (75%) ---------- */
 .projects {
+    border-radius: 10px;
+    height: calc(100vh - 360px);
     linear-gradient(101deg, rgb(255, 255, 255), rgb(194 137 239 / 27%) 36%, rgb(247 93 228 / 59%) 130%)
-    min-height: 400px;
     padding: 20px;
     width: 100%;
-    margin-top: -1.27rem;
+    overflow-y: auto;
 }
 
 .project-card{
@@ -70,7 +139,7 @@
 
 .map img {
     max-width: 100%;
-    height: auto;
+    height: calc(100vh - 360px);
     border-radius: 10px;
 }
 

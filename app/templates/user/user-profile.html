@@ -8,21 +8,12 @@
 {% block content %}
 
 <section class="profile-head">
+    <img src="{{ user.profile_pic or url_for('static', filename='images/default-profile.png') }}"
+     alt="Profile picture" class="profile-pic">
+    <h1>{{ user.username }}</h1>
+</section>
 
-    <!-- PERSONAL INFO -->
-    <div class="profile-image">
-        <img src="{{ user.profile_pic if user.profile_pic else url_for('static', filename='images/default-profile.png') }}"
-         alt="profile picture"
-         class="profile-pic">
-        <h1>{{ user.username }}</h1>
-    </div>
-    <div class="personal-info card">
-        <h3>Personal Info</h3>
-        <p><strong>Name:</strong> {{ user.name }}</p>
-        <p><strong>Username:</strong> {{ user.username }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Joined:</strong> {{ user.created_at.strftime('%Y-%m-%d') }}</p>
-    </div>
+<section class="profile-info">
 
 
 

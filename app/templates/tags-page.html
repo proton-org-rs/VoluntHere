@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Tag: #{{ tag.name }}{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tags.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="tag-header">
+    <h1>#{{ tag.name }}</h1>
+    <p>{{ projects|length }} project(s) found</p>
+</section>
+
+<section class="tag-projects">
+
+    {% if projects %}
+        <div class="project-grid">
+            {% for p in projects %}
+            <a href="/projects/{{ p.id }}" class="project-card">
+                <h2>{{ p.title }}</h2>
+                <p>{{ p.short_description }}</p>
+
+                <div class="tag-list">
+                    {% for t in p.tags %}
+                    <span class="tag-badge">#{{ t.name }}</span>
+                    {% endfor %}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="no-projects">No projects found with this tag.</p>
+    {% endif %}
+
+</section>
+
+{% endblock %}
