@@ -1,10 +1,11 @@
+
 /* -------------------------------------------------
    RECENT PROJECTS SECTION
 ---------------------------------------------------*/
 
 .recent-projects {
     display: grid;
-    grid-template-columns: 0.15fr 0.65fr 0.15fr; /* 10% | 75% | 15% (map image may need more space) */
+    grid-template-columns: 0.20fr 0.55fr 0.20fr; /* 10% | 75% | 15% (map image may need more space) */
     gap: 30px;
     margin-top: 40px;
     padding: 0 30px;
@@ -27,20 +28,20 @@
    FILTER BAR — final merged version
 ------------------------------------------*/
 .filter-bar {
-    background: #f2f2f2;
-    border-radius: 10px;
-    padding: 20px;
+    position: relative;
+    overflow: auto;
+    background: rgba(255, 255, 255, 0.32);
+    border-radius: 1rem;
+    /*border-radius: 3rem;*/
+    padding: 1.2rem;
     width: 100%;
+    /*border: solid 0.2rem rgba(134, 186, 202, 0.44);*/
+    box-shadow: 0 0.4rem 0.8rem rgba(0,0,0,0.25);
 
     /* Odvajanje od projekta */
     margin-right: 10px;
-    position: relative;
     height: calc(100vh - 360px);
     z-index: 2;
-
-    /* Adaptive height */
-    max-height: calc(100vh - 360px);
-    overflow-y: auto;
 
     /* Scroll styling */
     &::-webkit-scrollbar {
@@ -108,14 +109,57 @@
 
 /* ---------- PROJECTS (75%) ---------- */
 .projects {
-    background: #ffffff;
     border-radius: 10px;
     height: calc(100vh - 360px);
-    padding: 20px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    linear-gradient(101deg, rgb(255, 255, 255), rgb(194 137 239 / 27%) 36%, rgb(247 93 228 / 59%) 130%)
+    padding: 1.2rem;
     width: 100%;
+    overflow-y: auto;
+    margin-left: 1.2rem;
+    padding-bottom: 2.4rem;
+    box-shadow: 0 8px 1em rgba(0, 0, 0, 0.3);
+    color: #222;
+
+    /*border-style: solid;*/
+
+     /* Scroll styling */
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #c7c7c7;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+
+    scrollbar-width: thin;
+    scrollbar-color: #c7c7c7 transparent;
 }
 
+.project-card{
+    margin-bottom: 1.2em;
+    background: rgba(255, 255, 255, 0.32);
+    border: solid rgba(113, 113, 113, 0.64);;
+    a{
+        color: #333;
+    }
+    a:hover{
+        color: #333;
+    }
+}
+
+.project-card:hover{
+    background-color: #bef1ff;
+    transition: 0.5s ease;
+}
 
 
 /* ---------- MAP (10%) ---------- */
@@ -123,13 +167,11 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
-    width: 100%;
-}
-
-.map img {
+    min-width: 100% !important;
     max-width: 100%;
-    height: calc(100vh - 360px);
-    border-radius: 10px;
+    height: calc(100vh - 20rem);
+    border-radius: 0.8rem;
+    box-shadow: 0 8px 1em rgba(0, 0, 0, 0.3);
 }
 
 
@@ -141,20 +183,48 @@
 @media (max-width: 1100px) {
     .recent-projects {
         grid-template-columns: 0.15fr 1fr; /* filter shrinks, map disappears */
-    }
-
     .map {
-        display: none;
+    display: block !important;
+}
     }
 }
 
 @media (max-width: 768px) {
 
     .recent-projects {
-        grid-template-columns: 1fr; /* single column layout */
+        display: grid;
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto auto auto auto;
+        row-gap: 20px;
     }
 
     .filter-bar {
-        display: none;
+        display: none !important;
+    }
+
+    .section-title {
+        order: 1;
+        grid-column: 1;
+    }
+
+    .projects {
+        order: 2;
+        grid-column: 1;
+        width: 100%;
+        height: auto;
+        margin-left: 0;
+        max-height: none;
+    }
+
+    .map {
+        order: 3;
+        grid-column: 1;
+        display: block !important;
+        width: 100% !important;
+        height: 300px !important;
     }
 }
+
+
+
+

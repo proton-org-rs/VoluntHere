@@ -5,92 +5,160 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/user-profile.css') }}">
 {% endblock %}
 
+{% block script %} <script src="{{ url_for('static', filename='js/profile-tabs.js') }}"></script> {% endblock %}
+
 {% block content %}
 
-<section class="profile-head">
-    <img src="{{ user.profile_pic or url_for('static', filename='images/default-profile.png') }}"
-     alt="Profile picture" class="profile-pic">
-    <h1>{{ user.username }}</h1>
-</section>
+<section class="profile-header">
 
-<section class="profile-info">
-
-    <!-- LEFT COLUMN -->
-    <div class="profile-info-left">
-
-        <!-- PERSONAL INFO -->
-        <div class="personal-info card">
-            <h3>Personal Info</h3>
-
-            <p><strong>Name:</strong> {{ user.name }}</p>
-            <p><strong>Username:</strong> {{ user.username }}</p>
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Joined:</strong> {{ user.created_at.strftime('%Y-%m-%d') }}</p>
-        </div>
-
-        <!-- SOCIAL -->
-        <div class="social card">
-            <h3>Social Links</h3>
-
-            {% if user.facebook or user.instagram or user.linkedin %}
-                {% if user.facebook %}
-                <p><strong>Facebook:</strong> <a href="{{ user.facebook }}" target="_blank">{{ user.facebook }}</a></p>
-                {% endif %}
-                {% if user.instagram %}
-                <p><strong>Instagram:</strong> <a href="{{ user.instagram }}" target="_blank">{{ user.instagram }}</a></p>
-                {% endif %}
-                {% if user.linkedin %}
-                <p><strong>LinkedIn:</strong> <a href="{{ user.linkedin }}" target="_blank">{{ user.linkedin }}</a></p>
-                {% endif %}
-            {% else %}
-                <p>No social links added yet.</p>
-            {% endif %}
-        </div>
-
+    <!-- LEFT: PROFILE IMAGE -->
+    <div class="profile-left">
+        <img src="{{ user.profile_pic or url_for('static', filename='images/default-profile.png') }}"
+             alt="Profile picture"
+             class="profile-pic">
     </div>
 
+    <!-- CENTER: USER INFO -->
+    <div class="profile-center">
+        <h1>{{ user.name or user.username }}</h1>
+        <p class="profile-location">"Location unknown"</p>
+        <p class="profile-bio">"This user has not added a bio yet."</p>
 
-
-    <!-- RIGHT COLUMN -->
-    <div class="profile-info-right">
-
-        <!-- CURRENT PROJECTS -->
-        <div class="current-projects card">
-            <h3>Current Projects</h3>
-
-            {% if current_projects %}
-                <ul>
-                {% for application in current_projects %}
-                    <li>
-                        <strong>{{ application.project.title }}</strong>
-                        <p>{{ application.project.short_description }}</p>
-                    </li>
-                {% endfor %}
-                </ul>
-            {% else %}
-                <p>This user is not participating in any active projects.</p>
-            {% endif %}
+        <div class="profile-buttons">
+            <button class="btn-primary">Follow</button>
+            <button class="btn-secondary">Get in touch</button>
         </div>
 
+        <!-- Tabs -->
+
+        <div class="profile-tabs">
+            <button class="tab-btn active" data-tab="work">Work</button>
+            <button class="tab-btn" data-tab="socials">Socials</button>
+            <button class="tab-btn" data-tab="current">Current projects</button>
+            <button class="tab-btn" data-tab="about">About</button>
+        </div>
+
+        <!-- TAB CONTENT WRAPPER -->
+        <div class="tab-content-wrapper">
+
+            <!-- WORK TAB -->
+            <div class="tab-content active-tab" id="tab-work">
+                <h2>Work showcase</h2>
+                <p>This user’s featured work and highlights.</p>
+                <div class="work-gallery">
+                    <div class="work-card">Project Showcase 1</div>
+                    <div class="work-card">Project Showcase 2</div>
+                </div>
+            </div>
+
+            <!-- SOCIALS TAB -->
+            <div class="tab-content" id="tab-socials">
+                <h2>Social Links</h2>
+
+                {% if user.facebook or user.instagram or user.linkedin %}
+                    <ul>
+                        {% if user.facebook %}
+                            <li><a href="{{ user.facebook }}" target="_blank">Facebook</a></li>
+                        {% endif %}
+                        {% if user.instagram %}
+                            <li><a href="{{ user.instagram }}" target="_blank">Instagram</a></li>
+                        {% endif %}
+                        {% if user.linkedin %}
+                            <li><a href="{{ user.linkedin }}" target="_blank">LinkedIn</a></li>
+                        {% endif %}
+                    </ul>
+                {% else %}
+                    <p>This user has no social links yet.</p>
+                {% endif %}
+            </div>
+
+            <!-- CURRENT PROJECTS TAB -->
+            <div class="tab-content" id="tab-current">
+                <h2>Current volunteering</h2>
+
+                {% if current_projects %}
+                    <ul>
+                        {% for application in current_projects %}
+                            <li>
+                                <strong>{{ application.project.title }}</strong> –
+                                {{ application.project.short_description }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>This user is not currently participating in any active projects.</p>
+                {% endif %}
+            </div>
+
+            <!-- ABOUT TAB -->
+            <div class="tab-content" id="tab-about">
+                <h2>About {{ user.name }}</h2>
+                <p>{{ user.bio or "No biography added yet." }}</p>
+                <p>Member since: {{ user.created_at.strftime("%Y-%m-%d") }}</p>
+            </div>
+
+        </div>
+        </div>
+
+    <div class="profile-right">
+        <div class="stat">
+            <h2>{{ stats.finished }}</h2>
+            <p>Finished projects</p>
+        </div>
+
+        <div class="stat">
+            <h2>{{ stats.volunteering }}</h2>
+            <p>Currently volunteering</p>
+        </div>
+
+        <div class="stat">
+            <h2>{{ stats.organizing }}</h2>
+            <p>Organizing</p>
+        </div>
+    </div>
+
+</section>
+
+<hr class="separator">
+
+<!-- ==========================
+     PROJECTS SECTION
+========================== -->
+<section class="user-projects" style="width: 100vw;">
+    <h2 class="section-title">User Projects</h2>
+
+    <div class="project-display-grid">
+        {% for application in current_projects %}
+            <div class="project-item">
+                <img src="{{ url_for('static', filename='images/generic' ~ (range(1,4) | random) ~ '.jpg') }}"
+                     class="project-thumbnail">
+                <a href="/projects/{{ application.project.id }}"><h3>{{ application.project.title }}</h3> </a>
+                <h5>Organized by: <a href="/auth/profile/{{application.project.owner.username}}">{{ application.project.owner.name }}</a></h5>
+                <p>{{ application.project.short_description }}</p>
+            </div>
+        {% endfor %}
+    </div>
 
         <!-- PREVIOUS PROJECTS -->
-        <div class="previous-list card">
-            <h3>Previous Projects</h3>
+        <h3>Previous Projects</h3>
+        <div class="project-display-grid" style="display: flex; flex-wrap: wrap;">
             {% if finished_projects %}
-                <ul>
                 {% for project in finished_projects %}
-                    <li>
-                        <strong>{{ project.event_id }}</strong>
-                        <p>Hours worked: {{ project.hours }}</p>
-                    </li>
+                    <div class="project-item" style="min-width: 300px;">
+                        <img src="{{ url_for('static', filename='images/generic' ~ (range(1,4) | random) ~ '.jpg') }}"
+                            class="project-thumbnail">
+                        <a href="/projects/{{ project.id }}">
+                            <h3>{{ project.event_id }}</h3>
+                        </a>
+                        <h5>Hours worked: {{ project.hours }}</h5>
+                    </div>
                 {% endfor %}
-                </ul>
             {% else %}
                 <p>This user has no finished projects yet.</p>
             {% endif %}
             </div>
-    </div>
 
 </section>
+
 
 {% endblock %}

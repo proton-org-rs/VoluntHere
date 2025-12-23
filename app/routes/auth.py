@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from app import db, bcrypt
-from app.models import User
+from app.models import User, VolunteerApplication, Project
 import certification.user_blockchain_service
 import asyncio
 
@@ -11,31 +11,68 @@ auth_bp = Blueprint("auth", __name__)
 async def profile(username):
     user = User.query.filter_by(username=username).first_or_404()
 
-    applications = user.applications
+    # === STATISTIKA ===
 
-    current_projects = []
+    # 1) Finished projects where user participated
+    finished_projects_count = (
+        VolunteerApplication.query
+        .join(Project)
+        .filter(
+            VolunteerApplication.user_id == user.id,
+            Project.finished.is_(True)
+        ).count()
+    )
+
+    # 2) Active volunteerings (approved, not suspended, not finished)
+    currently_volunteering_count = (
+        VolunteerApplication.query
+        .join(Project)
+        .filter(
+            VolunteerApplication.user_id == user.id,
+            Project.finished.is_(False),
+            Project.suspended.is_(False),
+            Project.approved.is_(True)
+        ).count()
+    )
+
+    # 3) Projects owned by user (organizing)
+    organizing_count = (
+        Project.query
+        .filter(
+            Project.owner_id == user.id,
+            Project.finished.is_(False),
+            Project.suspended.is_(False)
+        ).count()
+    )
+
+    stats = {
+        "finished": finished_projects_count,
+        "volunteering": currently_volunteering_count,
+        "organizing": organizing_count
+    }
+    service = certification.user_blockchain_service.UserBlockchainService()
+    projects = await service.get_user_certificates(user.username)
+
     finished_projects = []
 
-    service = certification.user_blockchain_service.UserBlockchainService()
 
-    for app in applications:
-        if app.project.finished:
-            # ovde treba preci na sistem gde se cita sa blockchain-a umesto iz baze
-            projects = await service.get_user_certificates(user.username)
+    for project in projects:
+        if not project["event_id"].startswith("registration_"):
+            finished_projects.append(project)
 
-            for project in projects:
-                if not project["event_id"].startswith("registration_"):
-                    finished_projects.append(project)
-
-        else:
-            current_projects.append(app)
+    print(*finished_projects, sep="\n")
 
     return render_template(
         "user/user-profile.html",
         user=user,
-        current_projects=current_projects,
+        stats=stats,
+        current_projects=user.applications,   # već koristiš ovo
+        # finished_projects=[
+        #     app for app in user.applications if app.project.finished
+        # ],
         finished_projects=finished_projects
     )
+
 
 
 

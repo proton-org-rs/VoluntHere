@@ -1,88 +1,323 @@
-/* ================================
-   PROFILE HEAD
-================================ */
+/* ============================================
+   PROFILE HEADER CONTAINER
+============================================ */
+.profile-header {
+    margin: 2rem auto;
+    padding: 2.5rem;
+    width: 85%;
+    background: linear-gradient(135deg, #e9f1ff, #fdeaff);
+    border-radius: 25px;
 
-.profile-head {
-    display: flex;
-    flex-direction: column;
-    align-items: center;       /* centriranje */
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 40px;
-}
-
-.profile-head .profile-pic {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 15px;
-}
-
-
-/* ================================
-   PROFILE INFO SECTION
-================================ */
-
-.profile-info {
     display: grid;
-    grid-template-columns: 1fr 1fr;   /* leva | desna kolona */
-    gap: 40px;
+    grid-template-columns: 0.25fr 0.55fr 0.20fr;
+    gap: 2rem;
 
-    width: 100%;
-    padding: 0 40px;                  /* grljenje containera */
-    box-sizing: border-box;
-    justify-items: center;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-
-/* LEVA STRANA */
-.profile-info-left {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    align-items: flex-start;          /* grli levu stranu */
-}
-
-
-/* DESNA STRANA */
-.profile-info-right {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    align-items: flex-end;            /* grli desnu stranu */
-}
-
-
-/* KARTICE */
-.card {
-    background: #ffffff;
-    padding: 20px 25px;
-    border-radius: 10px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.05);
-    width: 100%;
-    max-width: 500px;                 /* da se ne širi beskonačno */
+/* ============================================
+   LEFT SIDE — PROFILE IMAGE
+============================================ */
+.profile-left img.profile-pic {
+    width: 150px;
     height: 150px;
-    overflow-y: auto;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-.card h3 {
-    margin-top: 0;
+/* ============================================
+   CENTER — USER INFO
+============================================ */
+.profile-center h1 {
+    font-size: 1.9rem;
+    margin-bottom: 0.2rem;
 }
 
+.profile-center p {
+    margin: 0.3rem 0;
+    font-size: 0.95rem;
+    color: #444;
+}
 
-/* ================================
-   RESPONSIVE
-================================ */
+.profile-buttons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.8rem;
+}
 
-@media (max-width: 900px) {
-    .profile-info {
-        grid-template-columns: 1fr;
-        gap: 25px;
+.profile-buttons .btn-primary {
+    background: #1e59ff;
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: box-shadow 0.3s ease-out;
+}
+
+.profile-buttons .btn-secondary {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ============================================
+   TABS (Work / Likes / etc.)
+============================================ */
+.profile-tabs {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.profile-tabs button {
+    background: none;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    color: #666;
+    position: relative;
+}
+
+.profile-tabs button.active {
+    color: #000;
+}
+
+.profile-tabs button.active::after {
+    content: "";
+    position: absolute;
+    width: 60%;
+    height: 3px;
+    background: #1e59ff;
+    bottom: -5px;
+    left: 20%;
+    border-radius: 3px;
+}
+
+/* ============================================
+   RIGHT SIDE — STATS
+============================================ */
+.profile-right {
+    text-align: center;
+}
+
+.stat h2 {
+    margin: 0;
+    font-size: 1.6rem;
+}
+
+.stat p {
+    margin: 0;
+    color: #777;
+}
+
+/* ============================================
+   PROJECT GRID
+============================================ */
+.user-projects {
+    margin: 2rem auto;
+    width: 85%;
+}
+
+.section-title {
+    margin-bottom: 1.2rem;
+}
+
+.project-display-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.8rem;
+}
+
+.project-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.project-thumbnail {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* ============================================
+   MOBILE RESPONSIVENESS (Phones & Small Tablets)
+============================================ */
+@media (max-width: 768px) {
+
+    /* ------- PROFILE HEADER ------- */
+    .profile-header {
+        grid-template-columns: 1fr;   /* sve u jednom stupcu */
+        text-align: center;
+        padding: 1.5rem;
+        gap: 1.5rem;
     }
 
-    .profile-info-left,
-    .profile-info-right {
-        align-items: center;     /* na mobilnom centrirano */
+    /* profilna slika manja */
+    .profile-left img.profile-pic {
+        width: 110px;
+        height: 110px;
+        margin: 0 auto;
+        border-radius: 15px;
+    }
+
+    /* naslov manji */
+    .profile-center h1 {
+        font-size: 1.4rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .profile-center p {
+        font-size: 0.85rem;
+    }
+
+    /* dugmad centrirana i uža */
+    .profile-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+    }
+
+    .profile-buttons .btn-primary,
+    .profile-buttons .btn-secondary {
+        padding: 0.45rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* tabs preko celog ekrana */
+    .profile-tabs {
+        justify-content: center;
+        gap: 0.8rem;
+        margin-top: 1rem;
+    }
+
+    .profile-tabs button {
+        font-size: 0.85rem;
+    }
+
+    /* statovi ispod, centrirani */
+    .profile-right {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1rem;
+    }
+
+    .stat h2 {
+        font-size: 1.2rem;
+    }
+
+
+    /* ------- PROJECT GRID ------- */
+    .project-display-grid {
+        grid-template-columns: 1fr;  /* 1 projekat po redu */
+        gap: 1.2rem;
+    }
+
+    .project-item {
+        padding: 1rem;
+    }
+
+    .project-thumbnail {
+        height: 140px;
     }
 }
+
+
+
+/* TAB BUTTONS */
+.profile-tabs {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.profile-tabs .tab-btn {
+    background: none;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    color: #666;
+    position: relative;
+    font-size: 1rem;
+}
+
+.profile-tabs .tab-btn.active {
+    color: #000;
+}
+
+.profile-tabs .tab-btn.active::after {
+    content: "";
+    position: absolute;
+    width: 60%;
+    height: 3px;
+    background: #1e59ff;
+    bottom: -5px;
+    left: 20%;
+    border-radius: 3px;
+}
+
+/* TAB CONTENT WRAPPER */
+.tab-content-wrapper {
+    position: relative;
+    overflow: hidden;
+    margin-top: 2rem;
+    min-height: 200px;
+}
+
+/* INDIVIDUAL TABS */
+.tab-content {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(40px);
+    transition: 0.4s ease;
+    pointer-events: none;
+}
+
+.active-tab {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+/* ANIMATION CLASSES */
+.slide-out-left {
+    animation: slideOutLeft 0.35s forwards ease;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.35s forwards ease;
+}
+
+@keyframes slideOutLeft {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(-50px); opacity: 0; }
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Content styling example */
+.work-gallery {
+    display: flex;
+    gap: 1rem;
+}
+
+.work-card {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+}
+

@@ -22,6 +22,8 @@ class User(db.Model, UserMixin):
 
     applications = db.relationship("VolunteerApplication", back_populates="user")
 
+    projects_owned = db.relationship("Project", back_populates="owner")
+
     def __repr__(self):
         return f"<User {self.email}>"
 
